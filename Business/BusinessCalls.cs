@@ -30,5 +30,38 @@ namespace Business
         {
             return _context.EditEjercicio(ejercicio);
         }
+        public static Ejercicio ValidateEjercicio(List<string> datos)
+        {
+            if(datos is not null)
+            {
+                try
+                {
+                    bool res;
+                    if(datos[4] == "true")
+                    {
+                        res = true;
+                    }
+                    else
+                    {
+                        res = false;
+                    }
+                    return new Ejercicio
+                    {
+                        Id = Int32.Parse(datos[0]),
+                        Nombre = datos[1],
+                        Descripcion = datos[2],
+                        Dificultad = Int32.Parse(datos[3]),
+                        Basico = res,
+                        MaterialNecesario = datos[5]
+                    };
+                }
+                catch
+                {
+                    return new Ejercicio();
+                }
+            }
+            return new Ejercicio();
+        }
+
     }
 }

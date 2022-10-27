@@ -30,7 +30,16 @@ namespace ViewForm
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            List<string> datos = new List<string>(); 
+            datos.Add(textBoxId.Text);
+            datos.Add(textBoxNombre.Text);
+            datos.Add(textBoxDescripcion.Text);
+            datos.Add(textBoxDificultad.Text);
+            datos.Add(textBoxBasico.Text);
+            datos.Add(textBoxMaterial.Text);
+            //Añadir añadir editar
+            Business.BusinessCalls.CreateEjercicio(Business.BusinessCalls.ValidateEjercicio(datos));
+            Business.BusinessCalls.EditEjercicio(Business.BusinessCalls.ValidateEjercicio(datos));
         }
         public void Cambiar(bool option)
         {
