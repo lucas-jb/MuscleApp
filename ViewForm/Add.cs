@@ -51,6 +51,7 @@ namespace ViewForm
             textBoxDificultad.Text = ejercicio.Dificultad.ToString();
             textBoxBasico.Text = ejercicio.Basico.ToString();
             textBoxMaterial.Text = ejercicio.MaterialNecesario;
+            labelinfo.Text = string.Empty;
         }
 
         public void LimpiarCampos()
@@ -61,6 +62,33 @@ namespace ViewForm
             textBoxDificultad.Text = string.Empty;
             textBoxBasico.Text = string.Empty;
             textBoxMaterial.Text = string.Empty;
+            labelinfo.Text = string.Empty;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (IsValid(textBoxId))
+            {
+                int id = Int32.Parse(textBoxId.Text);
+                if (Business.BusinessCalls.DeleteEjercicio(id))
+                {
+                    labelinfo.Text = "Ejercicio con id " + id.ToString() + " eliminado.";
+                }
+                else
+                {
+                    labelinfo.Text = "Ejercicio con id " + id.ToString() + " no se ha podido eliminar.";
+                }
+            }
+        }
+
+        private bool IsValid(TextBox texbox)
+        {
+            int id = Int32.Parse(textBoxId.Text);
+            if (Business.BusinessCalls.DameEjercicio(id).DameString() is not null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

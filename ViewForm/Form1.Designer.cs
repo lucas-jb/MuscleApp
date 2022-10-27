@@ -45,6 +45,7 @@
             this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelinfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -182,6 +183,7 @@
             this.button5.TabIndex = 8;
             this.button5.Text = "Eliminar";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // pictureBox1
             // 
@@ -193,12 +195,22 @@
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
+            // labelinfo
+            // 
+            this.labelinfo.AutoSize = true;
+            this.labelinfo.Location = new System.Drawing.Point(153, 78);
+            this.labelinfo.Name = "labelinfo";
+            this.labelinfo.Size = new System.Drawing.Size(28, 15);
+            this.labelinfo.TabIndex = 10;
+            this.labelinfo.Text = "info";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(1286, 495);
+            this.Controls.Add(this.labelinfo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.dataGridView1);
@@ -237,5 +249,6 @@
         private DataGridViewTextBoxColumn FechaCreacion;
         private Button button5;
         private PictureBox pictureBox1;
+        private Label labelinfo;
     }
 }

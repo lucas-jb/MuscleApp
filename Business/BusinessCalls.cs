@@ -18,5 +18,17 @@ namespace Business
         {
             return _context.GetAllEjerciciosAsync().Result ?? new List<Ejercicio>();
         }
+        public static bool DeleteEjercicio(int id)
+        {
+            return _context.DeleteEjercicio(id);
+        }
+        public static bool CreateEjercicio(Ejercicio ejercicio)
+        {
+            return _context.CreateEjercicio(ejercicio);
+        }
+        public static bool EditEjercicio(Ejercicio ejercicio)
+        {
+            return _context.EditEjercicio(ejercicio);
+        }
     }
 }

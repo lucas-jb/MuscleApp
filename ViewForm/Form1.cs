@@ -88,5 +88,21 @@ namespace ViewForm
                 e.Handled = true;
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (IsValid(textBox1))
+            {
+                int id = Int32.Parse(textBox1.Text);
+                if (Business.BusinessCalls.DeleteEjercicio(id))
+                {
+                    labelinfo.Text = "Ejercicio con id " + id.ToString() + " eliminado.";
+                }
+                else
+                {
+                    labelinfo.Text = "Ejercicio con id " + id.ToString() + " no se ha podido eliminar.";
+                }
+            }
+        }
     }
 }

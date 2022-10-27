@@ -43,6 +43,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.labelinfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -162,13 +164,32 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(128, 208);
+            this.button2.Location = new System.Drawing.Point(47, 208);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 15;
             this.button2.Text = "Añadir";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(128, 208);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "Eliminar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // labelinfo
+            // 
+            this.labelinfo.AutoSize = true;
+            this.labelinfo.Location = new System.Drawing.Point(3, 248);
+            this.labelinfo.Name = "labelinfo";
+            this.labelinfo.Size = new System.Drawing.Size(28, 15);
+            this.labelinfo.TabIndex = 17;
+            this.labelinfo.Text = "info";
             // 
             // Add
             // 
@@ -177,6 +198,8 @@
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(296, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.labelinfo);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -216,5 +239,7 @@
         private Label label6;
         private Label label7;
         private Button button2;
+        private Button button3;
+        private Label labelinfo;
     }
 }
