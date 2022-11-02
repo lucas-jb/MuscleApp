@@ -34,7 +34,6 @@
             this.textBoxDificultad = new System.Windows.Forms.TextBox();
             this.textBoxDescripcion = new System.Windows.Forms.TextBox();
             this.textBoxMaterial = new System.Windows.Forms.TextBox();
-            this.textBoxBasico = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.labelinfo = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -78,6 +78,7 @@
             this.textBoxDificultad.Name = "textBoxDificultad";
             this.textBoxDificultad.Size = new System.Drawing.Size(174, 23);
             this.textBoxDificultad.TabIndex = 4;
+            this.textBoxDificultad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDificultad_KeyPress);
             // 
             // textBoxDescripcion
             // 
@@ -92,13 +93,6 @@
             this.textBoxMaterial.Name = "textBoxMaterial";
             this.textBoxMaterial.Size = new System.Drawing.Size(174, 23);
             this.textBoxMaterial.TabIndex = 6;
-            // 
-            // textBoxBasico
-            // 
-            this.textBoxBasico.Location = new System.Drawing.Point(110, 128);
-            this.textBoxBasico.Name = "textBoxBasico";
-            this.textBoxBasico.Size = new System.Drawing.Size(174, 23);
-            this.textBoxBasico.TabIndex = 5;
             // 
             // label1
             // 
@@ -191,6 +185,14 @@
             this.labelinfo.TabIndex = 17;
             this.labelinfo.Text = "info";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(110, 128);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(174, 23);
+            this.comboBox1.TabIndex = 18;
+            // 
             // Add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -198,6 +200,7 @@
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(296, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.labelinfo);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -209,7 +212,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxMaterial);
-            this.Controls.Add(this.textBoxBasico);
             this.Controls.Add(this.textBoxDificultad);
             this.Controls.Add(this.textBoxDescripcion);
             this.Controls.Add(this.textBoxNombre);
@@ -230,7 +232,6 @@
         private TextBox textBoxDificultad;
         private TextBox textBoxDescripcion;
         private TextBox textBoxMaterial;
-        private TextBox textBoxBasico;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -241,5 +242,6 @@
         private Button button2;
         private Button button3;
         private Label labelinfo;
+        private ComboBox comboBox1;
     }
 }

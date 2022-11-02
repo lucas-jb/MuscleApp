@@ -14,5 +14,7 @@ namespace Data
         public bool CreateEjercicio(Ejercicio ejercicio);
         public bool DeleteEjercicio(int id);
         public bool EditEjercicio(Ejercicio ejercicio);
+        public bool UpdateFichero();
+        public bool ReloadFichero();
     }
 }

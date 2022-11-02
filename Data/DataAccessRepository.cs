@@ -88,7 +88,7 @@ namespace Data
             return await Task.FromResult(new Ejercicio() { Id = -1, Nombre="No existe."});
         }
 
-        public void ConvertirAJSON(List<Ejercicio> _repo)
+        private void ConvertirAJSON(List<Ejercicio> _repo)
         {
             List<string> lista = new List<string>();
             foreach (var item in _repo)
@@ -97,6 +97,15 @@ namespace Data
                 lista.Add(line);
             }
             File.WriteAllLines("ejercicios.txt", lista);
+        }
+        public bool UpdateFichero()
+        {
+            return false;
+        }
+
+        public bool ReloadFichero()
+        {
+            return false;
         }
     }
 }

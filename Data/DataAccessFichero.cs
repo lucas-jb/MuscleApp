@@ -16,6 +16,7 @@ namespace Data
 
         public DataAccessFichero()
         {
+
             List<string> lista = new List<string>();
             lista = File.ReadLines("ejercicios.txt").ToList();
 
@@ -26,6 +27,26 @@ namespace Data
             }
         }
 
+        public bool UpdateFichero()
+        {
+            File.WriteAllText("ejercicios.txt", "");
+            List<string> lista = new List<string>();
+            foreach (var item in _repo)
+            {
+                string line = JsonSerializer.Serialize<Model.Ejercicio>(item);
+                lista.Add(line);
+            }
+            File.WriteAllLines("ejercicios.txt", lista);
+            return true;
+        }
+        public bool ReloadFichero()
+        {
+            List<string> lista = new List<string>();
+            lista = File.ReadAllLines("ejercicios.txt.bak").ToList();
+            File.WriteAllText("ejercicios.txt", "");
+            File.WriteAllLines("ejercicios.txt", lista);
+            return true;
+        }
         public bool CreateEjercicio(Ejercicio ejercicio)
         {
             int id = ejercicio.Id;

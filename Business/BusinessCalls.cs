@@ -37,7 +37,7 @@ namespace Business
                 try
                 {
                     bool res;
-                    if(datos[4] == "true")
+                    if(datos[4] == "Si")
                     {
                         res = true;
                     }
@@ -62,6 +62,14 @@ namespace Business
             }
             return new Ejercicio();
         }
+        public static bool UpdateFichero()
+        {
+            return _context.UpdateFichero();
+        }
 
+        public static bool ReloadFichero()
+        {
+            return _context.ReloadFichero();
+        }
     }
 }

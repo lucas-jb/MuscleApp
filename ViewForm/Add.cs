@@ -21,6 +21,8 @@ namespace ViewForm
         {
             this.form1 = form1;
             InitializeComponent();
+            comboBox1.Items.Add("Si");
+            comboBox1.Items.Add("No");
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,17 +37,23 @@ namespace ViewForm
             datos.Add(textBoxNombre.Text);
             datos.Add(textBoxDescripcion.Text);
             datos.Add(textBoxDificultad.Text);
-            datos.Add(textBoxBasico.Text);
+            datos.Add(comboBox1.SelectedItem.ToString());
             datos.Add(textBoxMaterial.Text);
-            //Añadir añadir editar
-            Business.BusinessCalls.CreateEjercicio(Business.BusinessCalls.ValidateEjercicio(datos));
-            Business.BusinessCalls.EditEjercicio(Business.BusinessCalls.ValidateEjercicio(datos));
+            if (editar)
+            {
+                Business.BusinessCalls.EditEjercicio(Business.BusinessCalls.ValidateEjercicio(datos));
+            }
+            else
+            {
+                Business.BusinessCalls.CreateEjercicio(Business.BusinessCalls.ValidateEjercicio(datos));
+            }
         }
         public void Cambiar(bool option)
         {
             if(option)
             {
                 button2.Text = "Añadir";
+                textBoxId.Text = (BusinessCalls.DameAllEjercicio().Count() + 1).ToString();
             }
             else
             {
@@ -58,19 +66,25 @@ namespace ViewForm
             textBoxNombre.Text = ejercicio.Nombre;
             textBoxDescripcion.Text = ejercicio.Descripcion;
             textBoxDificultad.Text = ejercicio.Dificultad.ToString();
-            textBoxBasico.Text = ejercicio.Basico.ToString();
+            if (ejercicio.Basico)
+            {
+                comboBox1.SelectedIndex = 0;
+            }
+            else
+            {
+                comboBox1.SelectedIndex = 1;
+            }
             textBoxMaterial.Text = ejercicio.MaterialNecesario;
             labelinfo.Text = string.Empty;
         }
 
         public void LimpiarCampos()
         {
-            textBoxId.Text = string.Empty;
             textBoxNombre.Text = string.Empty;
             textBoxDescripcion.Text = string.Empty;
             textBoxDificultad.Text = string.Empty;
-            textBoxBasico.Text = string.Empty;
             textBoxMaterial.Text = string.Empty;
+            comboBox1.SelectedItem = null;
             labelinfo.Text = string.Empty;
         }
 
@@ -98,6 +112,18 @@ namespace ViewForm
                 return true;
             }
             return false;
+        }
+
+        private void textBoxDificultad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }
