@@ -11,19 +11,7 @@ namespace ViewForm
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (IsValid(textBox1))
-            {
-                dataGridView1.Rows.Clear();
-                int id = Int32.Parse(textBox1.Text);
-                List<Ejercicio> list = new List<Ejercicio>();
-                list.Add(Business.BusinessCalls.DameEjercicio(id));
-                MostrarTabla(list);
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void btnCrear_Click(object sender, EventArgs e)
         {
             FormAdd.editar = false;
             FormAdd.id = Business.BusinessCalls.DameAllEjercicio().Count();
@@ -33,7 +21,7 @@ namespace ViewForm
             this.Hide();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void btnEditar_Click(object sender, EventArgs e)
         {
             if (IsValid(textBox1))
             {
@@ -56,11 +44,6 @@ namespace ViewForm
                 }
             }
             return false;
-        }
-
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -91,7 +74,7 @@ namespace ViewForm
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (IsValid(textBox1))
             {
@@ -107,14 +90,34 @@ namespace ViewForm
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Business.BusinessCalls.UpdateFichero();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
+        private void btnRestablecer_Click(object sender, EventArgs e)
         {
             Business.BusinessCalls.ReloadFichero();
+        }
+
+        private void btnMostrarPorFecha_Click(object sender, EventArgs e)
+        {
+            DateTime date = dateTimePicker1.Value;
+            dataGridView1.Rows.Clear();
+            List<Ejercicio> list = Business.BusinessCalls.DameEjerciciosFecha(date);
+            MostrarTabla(list);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (IsValid(textBox1))
+            {
+                dataGridView1.Rows.Clear();
+                int id = Int32.Parse(textBox1.Text);
+                List<Ejercicio> list = new List<Ejercicio>();
+                list.Add(Business.BusinessCalls.DameEjercicio(id));
+                MostrarTabla(list);
+            }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

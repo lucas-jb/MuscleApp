@@ -37,7 +37,7 @@ namespace ViewForm
             datos.Add(textBoxNombre.Text);
             datos.Add(textBoxDescripcion.Text);
             datos.Add(textBoxDificultad.Text);
-            datos.Add(comboBox1.SelectedItem.ToString());
+            datos.Add(comboBox1.SelectedItem.ToString() ?? "No");
             datos.Add(textBoxMaterial.Text);
             if (editar)
             {

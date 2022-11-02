@@ -22,8 +22,8 @@ namespace Data
 
             foreach (var item in lista)
             {
-                Ejercicio ejercicio = JsonSerializer.Deserialize<Model.Ejercicio>(item);
-                _repo.Add(ejercicio);
+                Ejercicio? ejercicio = JsonSerializer.Deserialize<Model.Ejercicio>(item);
+                _repo.Add(ejercicio ?? new Ejercicio());
             }
         }
 
@@ -53,6 +53,7 @@ namespace Data
             if (_repo.FirstOrDefault(p => p.Id == id) is null)
             {
                 _repo.Add(ejercicio);
+                UpdateFichero();
                 return true;
             }
             return false;
@@ -64,6 +65,7 @@ namespace Data
             if (deleteEjercito is not null)
             {
                 _repo.Remove(deleteEjercito);
+                UpdateFichero();
                 return true;
             }
             return false;
@@ -95,6 +97,23 @@ namespace Data
                 return await Task.FromResult(ejercicio);
             }
             return await Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
+        }
+
+        public async Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date)
+        {
+            if (_repo is not null)
+            {
+                List<Ejercicio> lista = new List<Ejercicio>();
+                foreach (var item in _repo)
+                {
+                    if(item.FechaCreacion.Year == date.Year && item.FechaCreacion.Month == date.Month && item.FechaCreacion.Day == date.Day)
+                    {
+                        lista.Add(item);
+                    }
+                }
+                return await Task.FromResult(lista);
+            }
+            return await Task.Run(() => new List<Ejercicio>());
         }
     }
 }

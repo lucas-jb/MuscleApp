@@ -107,5 +107,22 @@ namespace Data
         {
             return false;
         }
+
+        public async Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date)
+        {
+            if (_repo is not null)
+            {
+                List<Ejercicio> lista = new List<Ejercicio>();
+                foreach (var item in _repo)
+                {
+                    if (item.FechaCreacion == date)
+                    {
+                        lista.Add(item);
+                    }
+                }
+                return await Task.FromResult(lista);
+            }
+            return await Task.Run(() => new List<Ejercicio>());
+        }
     }
 }

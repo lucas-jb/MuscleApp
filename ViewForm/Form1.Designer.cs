@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCrear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,58 +42,48 @@
             this.MaterialNecesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MusculosInvolucrados = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelinfo = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button8 = new System.Windows.Forms.Button();
+            this.btnRestablecer = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btnMostrarPorFecha = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(64, 23);
+            this.textBox1.Location = new System.Drawing.Point(37, 15);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(126, 23);
+            this.textBox1.Size = new System.Drawing.Size(113, 23);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(196, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(58, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Mostrar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 26);
+            this.label1.Location = new System.Drawing.Point(11, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Id:";
             // 
-            // button2
+            // btnCrear
             // 
-            this.button2.Location = new System.Drawing.Point(196, 53);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(183, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Crear ejercicio";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnCrear.Location = new System.Drawing.Point(165, 44);
+            this.btnCrear.Name = "btnCrear";
+            this.btnCrear.Size = new System.Drawing.Size(164, 23);
+            this.btnCrear.TabIndex = 4;
+            this.btnCrear.Text = "Crear ejercicio";
+            this.btnCrear.UseVisualStyleBackColor = true;
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1151, 391);
+            this.button3.Location = new System.Drawing.Point(1098, 378);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 23);
             this.button3.TabIndex = 5;
@@ -102,15 +91,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // btnEditar
             // 
-            this.button4.Location = new System.Drawing.Point(260, 24);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(53, 23);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Editar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnEditar.Location = new System.Drawing.Point(165, 15);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(77, 23);
+            this.btnEditar.TabIndex = 6;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // dataGridView1
             // 
@@ -125,7 +114,7 @@
             this.MaterialNecesario,
             this.MusculosInvolucrados,
             this.FechaCreacion});
-            this.dataGridView1.Location = new System.Drawing.Point(398, 25);
+            this.dataGridView1.Location = new System.Drawing.Point(345, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
@@ -180,20 +169,20 @@
             this.FechaCreacion.Name = "FechaCreacion";
             this.FechaCreacion.ReadOnly = true;
             // 
-            // button5
+            // btnEliminar
             // 
-            this.button5.Location = new System.Drawing.Point(319, 24);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(60, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Eliminar";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnEliminar.Location = new System.Drawing.Point(248, 15);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(81, 23);
+            this.btnEliminar.TabIndex = 8;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ViewForm.Properties.Resources.ronnie_coleman;
-            this.pictureBox1.Location = new System.Drawing.Point(64, 157);
+            this.pictureBox1.Location = new System.Drawing.Point(14, 115);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(315, 228);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -203,81 +192,70 @@
             // labelinfo
             // 
             this.labelinfo.AutoSize = true;
-            this.labelinfo.Location = new System.Drawing.Point(64, 87);
+            this.labelinfo.Location = new System.Drawing.Point(14, 86);
             this.labelinfo.Name = "labelinfo";
             this.labelinfo.Size = new System.Drawing.Size(28, 15);
             this.labelinfo.TabIndex = 10;
             this.labelinfo.Text = "info";
             // 
-            // button6
+            // btnRestablecer
             // 
-            this.button6.Location = new System.Drawing.Point(259, 128);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(120, 23);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "Guardar cambios";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.btnRestablecer.Location = new System.Drawing.Point(209, 349);
+            this.btnRestablecer.Name = "btnRestablecer";
+            this.btnRestablecer.Size = new System.Drawing.Size(120, 23);
+            this.btnRestablecer.TabIndex = 12;
+            this.btnRestablecer.Text = "Restablecer fichero";
+            this.btnRestablecer.UseVisualStyleBackColor = true;
+            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
             // 
-            // button7
+            // btnSalir
             // 
-            this.button7.Location = new System.Drawing.Point(133, 128);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(120, 23);
-            this.button7.TabIndex = 12;
-            this.button7.Text = "Restablecer fichero";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.btnSalir.Location = new System.Drawing.Point(146, 349);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(57, 23);
+            this.btnSalir.TabIndex = 15;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // dateTimePicker1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 15);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Nombre:";
+            this.dateTimePicker1.Location = new System.Drawing.Point(740, 378);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(228, 23);
+            this.dateTimePicker1.TabIndex = 16;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // textBox2
+            // btnMostrarPorFecha
             // 
-            this.textBox2.Location = new System.Drawing.Point(64, 52);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(126, 23);
-            this.textBox2.TabIndex = 13;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(64, 128);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(63, 23);
-            this.button8.TabIndex = 15;
-            this.button8.Text = "Salir";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btnMostrarPorFecha.Location = new System.Drawing.Point(974, 378);
+            this.btnMostrarPorFecha.Name = "btnMostrarPorFecha";
+            this.btnMostrarPorFecha.Size = new System.Drawing.Size(118, 23);
+            this.btnMostrarPorFecha.TabIndex = 17;
+            this.btnMostrarPorFecha.Text = "Mostrar por fecha";
+            this.btnMostrarPorFecha.UseVisualStyleBackColor = true;
+            this.btnMostrarPorFecha.Click += new System.EventHandler(this.btnMostrarPorFecha_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
-            this.ClientSize = new System.Drawing.Size(1254, 430);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
+            this.ClientSize = new System.Drawing.Size(1199, 411);
+            this.Controls.Add(this.btnMostrarPorFecha);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.btnRestablecer);
             this.Controls.Add(this.labelinfo);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -288,11 +266,10 @@
         #endregion
 
         private TextBox textBox1;
-        private Button button1;
         private Label label1;
-        private Button button2;
+        private Button btnCrear;
         private Button button3;
-        private Button button4;
+        private Button btnEditar;
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Nombre;
@@ -302,13 +279,12 @@
         private DataGridViewTextBoxColumn MaterialNecesario;
         private DataGridViewTextBoxColumn MusculosInvolucrados;
         private DataGridViewTextBoxColumn FechaCreacion;
-        private Button button5;
+        private Button btnEliminar;
         private PictureBox pictureBox1;
         private Label labelinfo;
-        private Button button6;
-        private Button button7;
-        private Label label2;
-        private TextBox textBox2;
-        private Button button8;
+        private Button btnRestablecer;
+        private Button btnSalir;
+        private DateTimePicker dateTimePicker1;
+        private Button btnMostrarPorFecha;
     }
 }

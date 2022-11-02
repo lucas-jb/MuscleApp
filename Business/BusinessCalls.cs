@@ -14,6 +14,10 @@ namespace Business
         {
             return _context.GetEjercicioAsync(id).Result ?? new Ejercicio() { Id=-1, Nombre="No existe."};
         }
+        public static List<Ejercicio> DameEjerciciosFecha(DateTime date)
+        {
+            return _context.GetEjerciciosFechaAsync(date).Result ?? new List<Ejercicio>();
+        }
         public static List<Ejercicio> DameAllEjercicio()
         {
             return _context.GetAllEjerciciosAsync().Result ?? new List<Ejercicio>();
