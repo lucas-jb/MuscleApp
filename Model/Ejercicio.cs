@@ -8,14 +8,14 @@ namespace Model
 {
     public class Ejercicio
     {
-        public int Id;
-        public string Nombre;
-        public string Descripcion;
-        public int Dificultad;
-        public bool Basico;
-        public string MaterialNecesario;
-        public List<string> MusculosInvolucrados;
-        public DateTime FechaCreacion;
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public int Dificultad { get; set; }
+        public bool Basico { get; set; }
+        public string MaterialNecesario { get; set; }
+        public List<string> MusculosInvolucrados { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
         public string DameString()
         {

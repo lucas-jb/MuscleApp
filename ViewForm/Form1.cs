@@ -48,10 +48,12 @@ namespace ViewForm
         }
         private bool IsValid(TextBox texbox)
         {
-            int id = Int32.Parse(textBox1.Text);
-            if (Business.BusinessCalls.DameEjercicio(id).DameString() is not null)
-            {
-                return true;
+            if(textBox1.Text != string.Empty){
+                int id = Int32.Parse(textBox1.Text);
+                if (Business.BusinessCalls.DameEjercicio(id).DameString() is not null)
+                {
+                    return true;
+                }
             }
             return false;
         }

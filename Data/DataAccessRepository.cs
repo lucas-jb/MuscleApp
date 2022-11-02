@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace Data
 {
     public class DataAccessRepository : IDataAccess
@@ -82,6 +86,17 @@ namespace Data
                 return await Task.FromResult(ejercicio);
             }
             return await Task.FromResult(new Ejercicio() { Id = -1, Nombre="No existe."});
+        }
+
+        public void ConvertirAJSON(List<Ejercicio> _repo)
+        {
+            List<string> lista = new List<string>();
+            foreach (var item in _repo)
+            {
+                string line = JsonSerializer.Serialize<Model.Ejercicio>(item);
+                lista.Add(line);
+            }
+            File.WriteAllLines("ejercicios.txt", lista);
         }
     }
 }

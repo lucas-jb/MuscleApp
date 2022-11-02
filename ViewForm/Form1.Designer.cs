@@ -46,6 +46,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelinfo = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -204,12 +206,32 @@
             this.labelinfo.TabIndex = 10;
             this.labelinfo.Text = "info";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(207, 181);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(120, 23);
+            this.button6.TabIndex = 11;
+            this.button6.Text = "Guardar cambios";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(81, 181);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(120, 23);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Restablecer fichero";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(1286, 495);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.labelinfo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button5);
@@ -250,5 +272,7 @@
         private Button button5;
         private PictureBox pictureBox1;
         private Label labelinfo;
+        private Button button6;
+        private Button button7;
     }
 }

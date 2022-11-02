@@ -5,33 +5,75 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace Data
 {
     public class DataAccessFichero : IDataAccess
     {
+        private readonly List<Ejercicio> _repo = new List<Ejercicio>();
+
+        public DataAccessFichero()
+        {
+            List<string> lista = new List<string>();
+            lista = File.ReadLines("ejercicios.txt").ToList();
+
+            foreach (var item in lista)
+            {
+                Ejercicio ejercicio = JsonSerializer.Deserialize<Model.Ejercicio>(item);
+                _repo.Add(ejercicio);
+            }
+        }
+
         public bool CreateEjercicio(Ejercicio ejercicio)
         {
-            throw new NotImplementedException();
+            int id = ejercicio.Id;
+            if (_repo.FirstOrDefault(p => p.Id == id) is null)
+            {
+                _repo.Add(ejercicio);
+                return true;
+            }
+            return false;
         }
 
         public bool DeleteEjercicio(int id)
         {
-            throw new NotImplementedException();
+            var deleteEjercito = _repo.FirstOrDefault(p => p.Id == id);
+            if (deleteEjercito is not null)
+            {
+                _repo.Remove(deleteEjercito);
+                return true;
+            }
+            return false;
         }
 
         public bool EditEjercicio(Ejercicio ejercicio)
         {
-            throw new NotImplementedException();
+            if (DeleteEjercicio(ejercicio.Id))
+            {
+                return CreateEjercicio(ejercicio);
+            }
+            return false;
         }
 
-        public Task<List<Ejercicio>?> GetAllEjerciciosAsync()
+        public async Task<List<Ejercicio>?> GetAllEjerciciosAsync()
         {
-            throw new NotImplementedException();
+            if (_repo is not null)
+            {
+                return await Task.FromResult(_repo);
+            }
+            return await Task.Run(() => new List<Ejercicio>());
         }
 
-        public Task<Ejercicio?> GetEjercicioAsync(int id)
+        public async Task<Ejercicio?> GetEjercicioAsync(int id)
         {
-            throw new NotImplementedException();
+            var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
+            if (ejercicio is not null)
+            {
+                return await Task.FromResult(ejercicio);
+            }
+            return await Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
         }
     }
 }

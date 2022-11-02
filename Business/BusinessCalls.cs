@@ -9,7 +9,7 @@ namespace Business
 {
     public static class BusinessCalls
     {
-        public static IDataAccess _context = new Data.DataAccessRepository();
+        public static IDataAccess _context = new Data.DataAccessFichero();
         public static Ejercicio DameEjercicio(int id)
         {
             return _context.GetEjercicioAsync(id).Result ?? new Ejercicio() { Id=-1, Nombre="No existe."};
