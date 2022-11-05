@@ -59,22 +59,13 @@ namespace Business
             {
                 try
                 {
-                    bool res;
-                    if(datos[4] == "Si")
-                    {
-                        res = true;
-                    }
-                    else
-                    {
-                        res = false;
-                    }
                     return new Ejercicio
                     {
                         Id = Int32.Parse(datos[0]),
                         Nombre = datos[1],
                         Descripcion = datos[2],
                         Dificultad = Int32.Parse(datos[3]),
-                        Basico = res,
+                        Basico = datos[4].Equals("Si"),
                         MaterialNecesario = datos[5]
                     };
                 }

@@ -9,12 +9,12 @@ namespace Model
     public class Ejercicio
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public string Descripcion { get; set; } = string.Empty;
         public int Dificultad { get; set; }
         public bool Basico { get; set; }
-        public string MaterialNecesario { get; set; }
-        public List<string> MusculosInvolucrados { get; set; }
+        public string MaterialNecesario { get; set; } = string.Empty;
+        public List<string> MusculosInvolucrados { get; set; } = new List<string>();
         public DateTime FechaCreacion { get; set; }
 
         public string DameString()
@@ -37,7 +37,7 @@ namespace Model
                 string muscles = string.Empty;
                 foreach (string muscle in MusculosInvolucrados)
                 {
-                    muscles = muscles + muscle + Environment.NewLine;
+                    muscles = muscles + muscle + ",";
                 }
                 return muscles;
             }
@@ -46,7 +46,7 @@ namespace Model
 
         public string toText()
         {
-            return "";
+            return "%" + Id.ToString() + ";" + Nombre + ";" + Descripcion + ";" + Dificultad.ToString() + ";" + Basico.ToString() + ";" + MaterialNecesario + ";" + FechaCreacion.ToString() + ";" + DameMusculos();
         }
     }
 

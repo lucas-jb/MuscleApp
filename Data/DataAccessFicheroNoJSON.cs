@@ -17,7 +17,7 @@ namespace Data
         {
 
             List<string> lista = new List<string>();
-            lista = File.ReadLines("ejercicios.txt").ToList();
+            lista = File.ReadLines("ejerciciosNoJSON.txt").ToList();
 
             foreach (var item in lista)
             {
@@ -28,19 +28,36 @@ namespace Data
 
         public bool UpdateFichero()
         {
-            File.WriteAllText("ejercicios.txt", "");
+            File.WriteAllText("ejerciciosNoJSON.txt", "");
             List<string> lista = new List<string>();
             foreach (var item in _repo)
             {
                 string line = EjercicioToText(item); 
                 lista.Add(line);
             }
-            File.WriteAllLines("ejercicios.txt", lista);
+            File.WriteAllLines("ejerciciosNoJSON.txt", lista);
             return true;
         }
 
         private Ejercicio TextToEjercicio(string item)
         {
+            if (item.StartsWith("%"))
+            {
+                char[] separators = new char[] { '%', ';' };
+                string[] subs = item.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                return new Ejercicio()
+                {
+                    //"%" + Id.ToString() + ";" + Nombre + ";" + Descripcion + ";" + Dificultad.ToString() + ";" + Basico.ToString() + ";" + MaterialNecesario + ";" + FechaCreacion.ToString() + ";" + DameMusculos();
+                    Id = Int32.Parse(subs[0]),
+                    Nombre = subs[1],
+                    Descripcion = subs[2],
+                    Dificultad = Int32.Parse(subs[3]),
+                    Basico = subs[4].Equals("true"),
+                    MaterialNecesario = subs[5],
+                    FechaCreacion = DateTime.Parse(subs[6]),
+                    MusculosInvolucrados = subs[7].Split(",", StringSplitOptions.RemoveEmptyEntries).ToList()
+                };
+            }
             return new Ejercicio();
         }
 
@@ -55,9 +72,9 @@ namespace Data
         public bool ReloadFichero()
         {
             List<string> lista = new List<string>();
-            lista = File.ReadAllLines("ejercicios.txt.bak").ToList();
-            File.WriteAllText("ejercicios.txt", "");
-            File.WriteAllLines("ejercicios.txt", lista);
+            lista = File.ReadAllLines("ejerciciosNoJSON.txt.bak").ToList();
+            File.WriteAllText("ejerciciosNoJSON.txt", "");
+            File.WriteAllLines("ejerciciosNoJSON.txt", lista);
             return true;
         }
         public bool CreateEjercicio(Ejercicio ejercicio)
