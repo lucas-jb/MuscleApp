@@ -9,7 +9,26 @@ namespace Business
 {
     public static class BusinessCalls
     {
-        public static IDataAccess _context = new Data.DataAccessFichero();
+        public static IDataAccess _context { get; set; } =  new Data.DataAccessFichero();
+
+        public static void ChangeDataAccess(int num)
+        {
+            if(num == 0)
+            {
+                _context = new Data.DataAccessRepository();
+            }
+            else
+            if (num == 1)
+            {
+                _context = new Data.DataAccessFichero();
+            }
+            else
+            if (num == 2)
+            {
+                _context = new Data.DataAccessFicheroNoJSON();
+            }
+        }
+
         public static Ejercicio DameEjercicio(int id)
         {
             return _context.GetEjercicioAsync(id).Result ?? new Ejercicio() { Id=-1, Nombre="No existe."};

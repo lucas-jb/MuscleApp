@@ -19,16 +19,15 @@ namespace Model
 
         public string DameString()
         {
-            string text =
-                        "Id = " + Id.ToString() + Environment.NewLine +
-                        "Nombre = " + Nombre + Environment.NewLine +
-                        "Descripcion = " + Descripcion + Environment.NewLine +
-                        "Dificultad = " + Dificultad.ToString() + Environment.NewLine + 
-                        "Basico = " + Basico.ToString() + Environment.NewLine + 
-                        "MaterialNecesario = " + MaterialNecesario + Environment.NewLine +
-                        "FechaCreacion = " + FechaCreacion.ToString() + Environment.NewLine +
-                        "MusculosInvolucrados = " + Environment.NewLine + DameMusculos();
-            return text;
+            return
+                    "Id = " + Id.ToString() + Environment.NewLine +
+                    "Nombre = " + Nombre + Environment.NewLine +
+                    "Descripcion = " + Descripcion + Environment.NewLine +
+                    "Dificultad = " + Dificultad.ToString() + Environment.NewLine + 
+                    "Basico = " + Basico.ToString() + Environment.NewLine + 
+                    "MaterialNecesario = " + MaterialNecesario + Environment.NewLine +
+                    "FechaCreacion = " + FechaCreacion.ToString() + Environment.NewLine +
+                    "MusculosInvolucrados = " + Environment.NewLine + DameMusculos();
     }
 
         private string DameMusculos()
@@ -43,6 +42,11 @@ namespace Model
                 return muscles;
             }
             return string.Empty;
+        }
+
+        public string toText()
+        {
+            return "";
         }
     }
 

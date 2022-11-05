@@ -26,6 +26,7 @@ namespace ViewForm
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            form1.Checkeo();
             form1.Show();
             this.Hide();
         }

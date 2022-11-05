@@ -105,6 +105,11 @@ namespace ViewForm
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            Checkeo();
+        }
+
+        public void Checkeo()
+        {
             if (IsValid(textBox1))
             {
                 dataGridView1.Rows.Clear();
@@ -118,6 +123,32 @@ namespace ViewForm
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(comboBoxModos.SelectedIndex == -1)
+            {
+                labelModo.Text = "Selecciona un modo.";
+            }else
+            if (comboBoxModos.SelectedIndex == 0)
+            {
+                labelModo.Text = "Modo memoria.";
+                BusinessCalls.ChangeDataAccess(0);
+            }
+            else
+            if (comboBoxModos.SelectedIndex == 1)
+            {
+                labelModo.Text = "Modo JSON.";
+                BusinessCalls.ChangeDataAccess(1);
+            }
+            else
+            if (comboBoxModos.SelectedIndex == 2)
+            {
+                labelModo.Text = "Modo a pelo.";
+                BusinessCalls.ChangeDataAccess(2);
+            }
+            Checkeo();
         }
     }
 }

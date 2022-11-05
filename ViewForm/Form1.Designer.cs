@@ -49,6 +49,9 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnMostrarPorFecha = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBoxModos = new System.Windows.Forms.ComboBox();
+            this.labelModo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -235,12 +238,46 @@
             this.btnMostrarPorFecha.UseVisualStyleBackColor = true;
             this.btnMostrarPorFecha.Click += new System.EventHandler(this.btnMostrarPorFecha_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(516, 378);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Cambiar modo";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboBoxModos
+            // 
+            this.comboBoxModos.FormattingEnabled = true;
+            this.comboBoxModos.Items.AddRange(new object[] {
+            "Modo memoria",
+            "Modo JSON",
+            "Modo a pelo"});
+            this.comboBoxModos.Location = new System.Drawing.Point(345, 378);
+            this.comboBoxModos.Name = "comboBoxModos";
+            this.comboBoxModos.Size = new System.Drawing.Size(165, 23);
+            this.comboBoxModos.TabIndex = 19;
+            // 
+            // labelModo
+            // 
+            this.labelModo.AutoSize = true;
+            this.labelModo.Location = new System.Drawing.Point(618, 382);
+            this.labelModo.Name = "labelModo";
+            this.labelModo.Size = new System.Drawing.Size(73, 15);
+            this.labelModo.TabIndex = 20;
+            this.labelModo.Text = "Modo JSON.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(1199, 411);
+            this.Controls.Add(this.labelModo);
+            this.Controls.Add(this.comboBoxModos);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnMostrarPorFecha);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnSalir);
@@ -286,5 +323,8 @@
         private Button btnSalir;
         private DateTimePicker dateTimePicker1;
         private Button btnMostrarPorFecha;
+        private Button button1;
+        private ComboBox comboBoxModos;
+        private Label labelModo;
     }
 }

@@ -1,28 +1,27 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace Data
 {
-    public class DataAccessFichero : IDataAccess
+    public class DataAccessFicheroNoJSON : IDataAccess
     {
         private readonly List<Ejercicio> _repo = new List<Ejercicio>();
 
-        public DataAccessFichero()
+        public DataAccessFicheroNoJSON()
         {
 
             List<string> lista = new List<string>();
             lista = File.ReadLines("ejercicios.txt").ToList();
 
-            foreach (var text in lista)
+            foreach (var item in lista)
             {
-                Ejercicio? ejercicio = JsonSerializer.Deserialize<Model.Ejercicio>(text);
+                Ejercicio? ejercicio = TextToEjercicio(item);
                 _repo.Add(ejercicio ?? new Ejercicio());
             }
         }
@@ -31,13 +30,27 @@ namespace Data
         {
             File.WriteAllText("ejercicios.txt", "");
             List<string> lista = new List<string>();
-            foreach (var ejercito in _repo)
+            foreach (var item in _repo)
             {
-                string line = JsonSerializer.Serialize<Model.Ejercicio>(ejercito);
+                string line = EjercicioToText(item); 
                 lista.Add(line);
             }
             File.WriteAllLines("ejercicios.txt", lista);
             return true;
+        }
+
+        private Ejercicio TextToEjercicio(string item)
+        {
+            return new Ejercicio();
+        }
+
+        private string EjercicioToText(Ejercicio ejercicio)
+        {
+            if(ejercicio is not null)
+            {
+                return ejercicio.toText();
+            }
+            return string.Empty;
         }
         public bool ReloadFichero()
         {
@@ -106,7 +119,7 @@ namespace Data
                 List<Ejercicio> lista = new List<Ejercicio>();
                 foreach (var item in _repo)
                 {
-                    if(item.FechaCreacion.Year == date.Year && item.FechaCreacion.Month == date.Month && item.FechaCreacion.Day == date.Day)
+                    if (item.FechaCreacion.Year == date.Year && item.FechaCreacion.Month == date.Month && item.FechaCreacion.Day == date.Day)
                     {
                         lista.Add(item);
                     }
