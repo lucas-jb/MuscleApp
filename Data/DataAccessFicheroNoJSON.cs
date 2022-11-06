@@ -15,7 +15,6 @@ namespace Data
 
         public DataAccessFicheroNoJSON()
         {
-
             List<string> lista = new List<string>();
             lista = File.ReadLines("ejerciciosNoJSON.txt").ToList();
 
@@ -47,7 +46,6 @@ namespace Data
                 string[] subs = item.Split(separators, StringSplitOptions.RemoveEmptyEntries);
                 return new Ejercicio()
                 {
-                    //"%" + Id.ToString() + ";" + Nombre + ";" + Descripcion + ";" + Dificultad.ToString() + ";" + Basico.ToString() + ";" + MaterialNecesario + ";" + FechaCreacion.ToString() + ";" + DameMusculos();
                     Id = Int32.Parse(subs[0]),
                     Nombre = subs[1],
                     Descripcion = subs[2],

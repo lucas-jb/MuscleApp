@@ -115,7 +115,7 @@ namespace Data
                 List<Ejercicio> lista = new List<Ejercicio>();
                 foreach (var item in _repo)
                 {
-                    if (item.FechaCreacion == date)
+                    if (item.FechaCreacion.Year == date.Year && item.FechaCreacion.Month == date.Month && item.FechaCreacion.Day == date.Day)
                     {
                         lista.Add(item);
                     }
