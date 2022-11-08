@@ -15,10 +15,10 @@ namespace Data
         {
             var id = new byte[10];
             var name = new byte[10];
-            var descripcion = byte[10];
-            var basico = byte[10];
-            var material = byte[10];
-            var material = byte[10];
+            var descripcion = new byte[10];
+            var basico = new byte[10];
+            var material = new byte[10];
+            var fecha = new byte[10];
         }
 
         public bool UpdateFichero()
