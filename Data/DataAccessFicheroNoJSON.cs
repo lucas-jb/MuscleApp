@@ -12,11 +12,12 @@ namespace Data
     public class DataAccessFicheroNoJSON : IDataAccess
     {
         private readonly List<Ejercicio> _repo = new List<Ejercicio>();
+        private string _ruta = "ejerciciosNoJSON.txt";
 
         public DataAccessFicheroNoJSON()
         {
             List<string> lista = new List<string>();
-            lista = File.ReadLines("ejerciciosNoJSON.txt").ToList();
+            lista = File.ReadLines(_ruta).ToList();
 
             foreach (var item in lista)
             {
@@ -27,14 +28,14 @@ namespace Data
 
         public bool UpdateFichero()
         {
-            File.WriteAllText("ejerciciosNoJSON.txt", "");
+            File.WriteAllText(_ruta, "");
             List<string> lista = new List<string>();
             foreach (var item in _repo)
             {
                 string line = EjercicioToText(item); 
                 lista.Add(line);
             }
-            File.WriteAllLines("ejerciciosNoJSON.txt", lista);
+            File.WriteAllLines(_ruta, lista);
             return true;
         }
 
@@ -70,9 +71,9 @@ namespace Data
         public bool ReloadFichero()
         {
             List<string> lista = new List<string>();
-            lista = File.ReadAllLines("ejerciciosNoJSON.txt.bak").ToList();
-            File.WriteAllText("ejerciciosNoJSON.txt", "");
-            File.WriteAllLines("ejerciciosNoJSON.txt", lista);
+            lista = File.ReadAllLines(_ruta).ToList();
+            File.WriteAllText(_ruta, "");
+            File.WriteAllLines(_ruta, lista);
             return true;
         }
         public bool CreateEjercicio(Ejercicio ejercicio)
