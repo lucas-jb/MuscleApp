@@ -30,7 +30,7 @@ namespace Model
                     "MusculosInvolucrados = " + Environment.NewLine + DameMusculos();
     }
 
-        private string DameMusculos()
+        public string DameMusculos()
         {
             if(MusculosInvolucrados is not null)
             {

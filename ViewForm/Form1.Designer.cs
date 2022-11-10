@@ -254,7 +254,8 @@
             this.comboBoxModos.Items.AddRange(new object[] {
             "Modo memoria",
             "Modo JSON",
-            "Modo a pelo"});
+            "Modo a pelo",
+            "Modo bytes"});
             this.comboBoxModos.Location = new System.Drawing.Point(345, 378);
             this.comboBoxModos.Name = "comboBoxModos";
             this.comboBoxModos.Size = new System.Drawing.Size(165, 23);

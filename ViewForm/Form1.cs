@@ -148,6 +148,12 @@ namespace ViewForm
                 labelModo.Text = "Modo a pelo.";
                 BusinessCalls.ChangeDataAccess(2);
             }
+            else
+            if (comboBoxModos.SelectedIndex == 3)
+            {
+                labelModo.Text = "Modo bytes.";
+                BusinessCalls.ChangeDataAccess(3);
+            }
             Checkeo();
         }
     }

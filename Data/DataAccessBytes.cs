@@ -11,7 +11,7 @@ namespace Data
     {
         private readonly List<Ejercicio> _repo = new List<Ejercicio>();
         private string _ruta = "ejerciciosBytes.txt";
-        private int _sumaTotal = 236;
+        private int _sumaTotal = 338;
         public DataAccessBytes()
         {
             var id = new byte[5];
@@ -20,7 +20,9 @@ namespace Data
             var descripcion = new byte[100];
             var basico = new byte[1];
             var material = new byte[100];
+            var musculos = new byte[100];
             var fecha = new byte[19];
+            var dificultad = new byte[2];
         }
 
         public bool UpdateFichero()
@@ -33,6 +35,22 @@ namespace Data
         }
         public bool CreateEjercicio(Ejercicio ejercicio)
         {
+            string line = string.Empty;
+            line = line + "1";
+            line = line + ejercicio.Id.ToString().PadRight(5, ' ');
+            line = line + ejercicio.Nombre.ToString().PadRight(10, ' ');
+            line = line + ejercicio.Descripcion.ToString().PadRight(100, ' ');
+            line = line + ejercicio.Basico.ToString().PadRight(1, ' ');
+            line = line + ejercicio.MaterialNecesario.ToString().PadRight(100, ' ');
+            line = line + ejercicio.FechaCreacion.ToString().PadRight(19, ' ');
+            line = line + ejercicio.Dificultad.ToString().PadRight(2, ' ');
+            line = line + ejercicio.DameMusculos().PadRight(100, ' ');
+            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
+            {
+                var ejer = Encoding.ASCII.GetBytes(line);
+                fs.Write(ejer, 0 , _sumaTotal);
+            }
+
             return false;
         }
         public bool DeleteEjercicio(int id)
@@ -45,6 +63,18 @@ namespace Data
         }
         public async Task<List<Ejercicio>?> GetAllEjerciciosAsync()
         {
+            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
+            {
+                List<Ejercicio> listaEjercicios = new List<Ejercicio>();
+                var cont = fs.Length / _sumaTotal;
+                for (long i = 0; i < cont; i++ )
+                {
+                    var a = new byte[_sumaTotal];
+                    fs.Read(a, 0, _sumaTotal);
+                    listaEjercicios.Add(TextToEjercicio(Encoding.ASCII.GetString(a)));
+                }
+                return await Task.Run(() => listaEjercicios);
+            }
             return await Task.Run(() => new List<Ejercicio>());
         }
         public async Task<Ejercicio?> GetEjercicioAsync(int id)
@@ -67,24 +97,25 @@ namespace Data
         }
         private Ejercicio TextToEjercicio(string item)
         {
-            string id = item.Substring(1,6);
-            string nombre = item.Substring(7,17);
-            string descripcion = item.Substring(18,118);
-            string basico = item.Substring(119,6);
-            string material = item.Substring(1,6);
-            string fecha = item.Substring(1,6);
+            string id = item.Substring(1,6).TrimEnd();
+            string nombre = item.Substring(6,16).TrimEnd();
+            string descripcion = item.Substring(16,116).TrimEnd();
+            string basico = item.Substring(116,117).TrimEnd();
+            string material = item.Substring(117,217).TrimEnd();
+            string fecha = item.Substring(217,236).TrimEnd();
+            string dificultad = item.Substring(236, 238).TrimEnd();
+            string musculos = item.Substring(238, 338).TrimEnd();
             return new Ejercicio()
             {
-                Id = Int32.Parse(subs[0]),
-                Nombre = subs[1],
-                Descripcion = subs[2],
-                Dificultad = Int32.Parse(subs[3]),
-                Basico = subs[4].Equals("true"),
-                MaterialNecesario = subs[5],
-                FechaCreacion = DateTime.Parse(subs[6]),
-                MusculosInvolucrados = subs[7].Split(",", StringSplitOptions.RemoveEmptyEntries).ToList()
-            };
-            return new Ejercicio();
+                Id = Int32.Parse(id),
+                Nombre = nombre,
+                Descripcion = descripcion,
+                Dificultad = Int32.Parse(dificultad),
+                Basico = basico.Equals("1"),
+                MaterialNecesario = material,
+                FechaCreacion = DateTime.Parse(fecha),
+                MusculosInvolucrados = musculos.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList()
+            } ?? new Ejercicio() { Id = -1, Nombre = "No existe." };
         }
         public async Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date)
         {

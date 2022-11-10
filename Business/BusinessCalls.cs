@@ -27,6 +27,11 @@ namespace Business
             {
                 _context = new Data.DataAccessFicheroNoJSON();
             }
+            else
+            if (num == 3)
+            {
+                _context = new Data.DataAccessBytes();
+            }
         }
 
         public static Ejercicio DameEjercicio(int id)
