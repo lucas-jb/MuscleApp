@@ -9,14 +9,13 @@ namespace Data
 {
     public class DataAccessBytes : IDataAccess
     {
-        private readonly List<Ejercicio> _repo = new List<Ejercicio>();
-        private string _ruta = "ejerciciosBytes.txt";
-        private int _sumaTotal = 338;
+        private string _ruta = "..\\..\\..\\..\\Data\\Files\\ejerciciosBytes.txt";
+        private int _sumaTotal = 343;
         public DataAccessBytes()
         {
             var id = new byte[5];
             var delete = new byte[1];
-            var name = new byte[10];
+            var name = new byte[15];
             var descripcion = new byte[100];
             var basico = new byte[1];
             var material = new byte[100];
@@ -38,20 +37,20 @@ namespace Data
             string line = string.Empty;
             line = line + "1";
             line = line + ejercicio.Id.ToString().PadRight(5, ' ');
-            line = line + ejercicio.Nombre.ToString().PadRight(10, ' ');
+            line = line + ejercicio.Nombre.ToString().PadRight(15, ' ');
             line = line + ejercicio.Descripcion.ToString().PadRight(100, ' ');
             line = line + ejercicio.Basico.ToString().PadRight(1, ' ');
             line = line + ejercicio.MaterialNecesario.ToString().PadRight(100, ' ');
             line = line + ejercicio.FechaCreacion.ToString().PadRight(19, ' ');
             line = line + ejercicio.Dificultad.ToString().PadRight(2, ' ');
             line = line + ejercicio.DameMusculos().PadRight(100, ' ');
-            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Write))
             {
                 var ejer = Encoding.ASCII.GetBytes(line);
                 fs.Write(ejer, 0 , _sumaTotal);
             }
 
-            return false;
+            return true;
         }
         public bool DeleteEjercicio(int id)
         {
@@ -71,11 +70,10 @@ namespace Data
                 {
                     var a = new byte[_sumaTotal];
                     fs.Read(a, 0, _sumaTotal);
-                    listaEjercicios.Add(TextToEjercicio(Encoding.ASCII.GetString(a)));
+                    listaEjercicios.Add(await Task.Run(() => TextToEjercicio(Encoding.ASCII.GetString(a))));
                 }
                 return await Task.Run(() => listaEjercicios);
             }
-            return await Task.Run(() => new List<Ejercicio>());
         }
         public async Task<Ejercicio?> GetEjercicioAsync(int id)
         {
@@ -97,14 +95,14 @@ namespace Data
         }
         private Ejercicio TextToEjercicio(string item)
         {
-            string id = item.Substring(1,6).TrimEnd();
-            string nombre = item.Substring(6,16).TrimEnd();
-            string descripcion = item.Substring(16,116).TrimEnd();
-            string basico = item.Substring(116,117).TrimEnd();
-            string material = item.Substring(117,217).TrimEnd();
-            string fecha = item.Substring(217,236).TrimEnd();
-            string dificultad = item.Substring(236, 238).TrimEnd();
-            string musculos = item.Substring(238, 338).TrimEnd();
+            string id = item.Substring(1,6);
+            string nombre = item.Substring(6,21);
+            string descripcion = item.Substring(21,121);
+            string basico = item.Substring(121,122);
+            string material = item.Substring(122,222);
+            string fecha = item.Substring(222,241);
+            string dificultad = item.Substring(241, 243);
+            string musculos = item.Substring(243, 343);
             return new Ejercicio()
             {
                 Id = Int32.Parse(id),
@@ -119,6 +117,7 @@ namespace Data
         }
         public async Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date)
         {
+
             return await Task.Run(() => new List<Ejercicio>());
         }
     }

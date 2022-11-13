@@ -12,7 +12,7 @@ namespace Data
     public class DataAccessFicheroNoJSON : IDataAccess
     {
         private readonly List<Ejercicio> _repo = new List<Ejercicio>();
-        private string _ruta = "ejerciciosNoJSON.txt";
+        private string _ruta = "..\\..\\..\\..\\Data\\Files\\ejerciciosNoJSON.txt";
 
         public DataAccessFicheroNoJSON()
         {

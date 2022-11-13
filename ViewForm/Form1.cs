@@ -14,10 +14,11 @@ namespace ViewForm
         private void btnCrear_Click(object sender, EventArgs e)
         {
             FormAdd.editar = false;
-            FormAdd.id = Business.BusinessCalls.DameAllEjercicio().Count();
+            //FormAdd.id = Business.BusinessCalls.DameAllEjercicio().Count();
+            FormAdd.id = 1;
             FormAdd.Show();
             FormAdd.Cambiar(true);
-            FormAdd.LimpiarCampos();
+            //FormAdd.LimpiarCampos();
             this.Hide();
         }
 

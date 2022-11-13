@@ -54,7 +54,8 @@ namespace ViewForm
             if(option)
             {
                 button2.Text = "Añadir";
-                textBoxId.Text = (BusinessCalls.DameAllEjercicio().Count() + 1).ToString();
+                //textBoxId.Text = (BusinessCalls.DameAllEjercicio().Count() + 1).ToString();
+                textBoxId.Text = "1";
             }
             else
             {

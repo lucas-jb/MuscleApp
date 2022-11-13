@@ -13,12 +13,13 @@ namespace Data
     public class DataAccessFichero : IDataAccess
     {
         private readonly List<Ejercicio> _repo = new List<Ejercicio>();
+        private readonly string _ruta = "..\\..\\..\\..\\Data\\Files\\ejercicios.txt";
 
         public DataAccessFichero()
         {
 
             List<string> lista = new List<string>();
-            lista = File.ReadLines("ejercicios.txt").ToList();
+            lista = File.ReadLines(_ruta).ToList();
 
             foreach (var text in lista)
             {
@@ -29,22 +30,22 @@ namespace Data
 
         public bool UpdateFichero()
         {
-            File.WriteAllText("ejercicios.txt", "");
+            File.WriteAllText(_ruta, "");
             List<string> lista = new List<string>();
             foreach (var ejercito in _repo)
             {
                 string line = JsonSerializer.Serialize<Model.Ejercicio>(ejercito);
                 lista.Add(line);
             }
-            File.WriteAllLines("ejercicios.txt", lista);
+            File.WriteAllLines(_ruta, lista);
             return true;
         }
         public bool ReloadFichero()
         {
             List<string> lista = new List<string>();
-            lista = File.ReadAllLines("ejercicios.txt.bak").ToList();
-            File.WriteAllText("ejercicios.txt", "");
-            File.WriteAllLines("ejercicios.txt", lista);
+            lista = File.ReadAllLines(_ruta+".bak").ToList();
+            File.WriteAllText(_ruta, "");
+            File.WriteAllLines(_ruta, lista);
             return true;
         }
         public bool CreateEjercicio(Ejercicio ejercicio)
