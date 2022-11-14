@@ -118,14 +118,25 @@ namespace Data
             return await Task.Run(() => new List<Ejercicio>());
         }
 
-        public async Task<Ejercicio?> GetEjercicioAsync(int id)
+        public Task<Ejercicio?> GetEjercicioAsync(int id)
         {
-            var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
-            if (ejercicio is not null)
+            Task<Ejercicio> task = new Task<Ejercicio>(() =>
             {
-                return await Task.FromResult(ejercicio);
-            }
-            return await Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
+                var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
+                if (ejercicio is not null)
+                {
+                    return ejercicio;
+                }
+                 return new Ejercicio() { Id = -1, Nombre = "No existe." };
+            });
+
+            task.Start();
+            //var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
+            //if (ejercicio is not null)
+            //{
+            //    return await Task.FromResult(ejercicio);
+            //}
+            return task;
         }
 
         public async Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date)
