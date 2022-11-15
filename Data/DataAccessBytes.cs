@@ -54,10 +54,13 @@ namespace Data
         }
         public bool DeleteEjercicio(int id)
         {
+            var a = GetEjercicioAsync(id).Result;
+
             return false;
         }
         public bool EditEjercicio(Ejercicio ejercicio)
         {
+            
             return false;
         }
         public Task<List<Ejercicio>?> GetAllEjerciciosAsync()
