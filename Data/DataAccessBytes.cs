@@ -34,6 +34,17 @@ namespace Data
         }
         public bool CreateEjercicio(Ejercicio ejercicio)
         {
+            var line = EjercicioToText(ejercicio);
+            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.ReadWrite))
+            {
+                var ejer = Encoding.ASCII.GetBytes(line);
+                fs.Seek(fs.Length, SeekOrigin.Begin);
+                fs.Write(ejer, 0, _sumaTotal);
+            }
+            return true;
+        }
+        private string EjercicioToText(Ejercicio ejercicio)
+        {
             string line = string.Empty;
             line = line + "1";
             line = line + ejercicio.Id.ToString().PadRight(5, ' ');
@@ -44,30 +55,30 @@ namespace Data
             line = line + ejercicio.FechaCreacion.ToString().PadRight(19, ' ');
             line = line + ejercicio.Dificultad.ToString().PadRight(2, ' ');
             line = line + ejercicio.DameMusculos().PadRight(100, ' ');
-            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Write))
-            {
-                var ejer = Encoding.ASCII.GetBytes(line);
-                fs.Write(ejer, 0 , _sumaTotal);
-            }
-            
-            return true;
+            return line;
         }
         public bool DeleteEjercicio(int id)
         {
-            var a = GetEjercicioAsync(id).Result;
-
+            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Write))
+            {
+                fs.Seek(_sumaTotal * id, SeekOrigin.Begin);
+                fs.Write(Encoding.ASCII.GetBytes("0"));
+            }
             return false;
         }
         public bool EditEjercicio(Ejercicio ejercicio)
         {
-            
+            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Write))
+            {
+                fs.Seek(_sumaTotal * (ejercicio.Id - 1), SeekOrigin.Begin);
+                fs.Write(Encoding.ASCII.GetBytes(EjercicioToText(ejercicio)));
+            }
             return false;
         }
         public Task<List<Ejercicio>?> GetAllEjerciciosAsync()
         {
             using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
             {
-
                 List<Ejercicio> listaEjercicios = new List<Ejercicio>();
                 var cont = fs.Length / _sumaTotal;
                 for (long i = 0; i < cont; i++ )
@@ -76,7 +87,6 @@ namespace Data
                     fs.Read(a, 0, _sumaTotal);
                     listaEjercicios.Add(TextToEjercicio(Encoding.ASCII.GetString(a)));
                 }
-
                 return Task.Run(() => listaEjercicios);
             }
         }
@@ -84,18 +94,22 @@ namespace Data
         {
             using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
             {
-                fs.Seek(_sumaTotal*id, SeekOrigin.Begin);
-                var a = new byte[_sumaTotal];
-                fs.Read(a, 0, _sumaTotal);
-                string ejercicio = Encoding.ASCII.GetString(a);
-                if (ejercicio.Substring(0,1) == "1")
+                if(id > 0) 
                 {
-                    return Task.FromResult(TextToEjercicio(ejercicio));
+                    fs.Seek(_sumaTotal * (id - 1), SeekOrigin.Begin);
+                    var a = new byte[_sumaTotal];
+                    fs.Read(a, 0, _sumaTotal);
+                    string ejercicio = Encoding.ASCII.GetString(a);
+                    if (ejercicio.Substring(0, 1) == "1")
+                    {
+                        return Task.FromResult(TextToEjercicio(ejercicio));
+                    }
+                    else
+                    {
+                        return Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
+                    }
                 }
-                else
-                {
-                    return Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
-                }
+                return Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
             }
         }
         private Ejercicio TextToEjercicio(string item)
