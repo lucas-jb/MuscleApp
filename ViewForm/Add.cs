@@ -49,12 +49,13 @@ namespace ViewForm
                 Business.BusinessCalls.CreateEjercicio(Business.BusinessCalls.ValidateEjercicio(datos));
             }
         }
-        public void Cambiar(bool option)
+        public async void Cambiar(bool option)
         {
-            if(option)
+            var ejercicios = await BusinessCalls.DameAllEjercicio();
+            if (option)
             {
                 button2.Text = "Añadir";
-                textBoxId.Text = (BusinessCalls.DameAllEjercicio().Count() + 1).ToString();
+                textBoxId.Text = (ejercicios.Count() + 1).ToString();
             }
             else
             {
@@ -89,9 +90,9 @@ namespace ViewForm
             labelinfo.Text = string.Empty;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
-            if (IsValid(textBoxId))
+            if (await IsValid(textBoxId))
             {
                 int id = Int32.Parse(textBoxId.Text);
                 if (Business.BusinessCalls.DeleteEjercicio(id))
@@ -105,10 +106,11 @@ namespace ViewForm
             }
         }
 
-        private bool IsValid(TextBox texbox)
+        private async Task<bool> IsValid(TextBox texbox)
         {
             int id = Int32.Parse(textBoxId.Text);
-            if (Business.BusinessCalls.DameEjercicio(id).DameString() is not null)
+            var ejercicio = await Business.BusinessCalls.DameEjercicio(id);
+            if (ejercicio.DameString() is not null)
             {
                 return true;
             }

@@ -52,7 +52,7 @@ namespace Data
             line = line + ejercicio.Descripcion.ToString().PadRight(100, ' ');
             line = line + ejercicio.Basico.ToString().PadRight(5, ' ');
             line = line + ejercicio.MaterialNecesario.ToString().PadRight(100, ' ');
-            line = line + ejercicio.FechaCreacion.ToString().PadRight(19, ' ');
+            line = line + ejercicio.FechaModificacion.ToString().PadRight(19, ' ');
             line = line + ejercicio.Dificultad.ToString().PadRight(2, ' ');
             line = line + ejercicio.DameMusculos().PadRight(100, ' ');
             return line;
@@ -75,42 +75,44 @@ namespace Data
             }
             return false;
         }
-        public Task<List<Ejercicio>?> GetAllEjerciciosAsync()
+        public Task<List<Ejercicio>> GetAllEjerciciosAsync()
         {
-            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
+            return Task.Run(() =>
             {
-                List<Ejercicio> listaEjercicios = new List<Ejercicio>();
-                var cont = fs.Length / _sumaTotal;
-                for (long i = 0; i < cont; i++ )
+                using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
                 {
-                    var a = new byte[_sumaTotal];
-                    fs.Read(a, 0, _sumaTotal);
-                    listaEjercicios.Add(TextToEjercicio(Encoding.ASCII.GetString(a)));
+                    List<Ejercicio> listaEjercicios = new List<Ejercicio>();
+                    var cont = fs.Length / _sumaTotal;
+                    for (long i = 0; i < cont; i++)
+                    {
+                        var a = new byte[_sumaTotal];
+                        fs.Read(a, 0, _sumaTotal);
+                        listaEjercicios.Add(TextToEjercicio(Encoding.ASCII.GetString(a)));
+                    }
+                    return listaEjercicios;
                 }
-                return Task.Run(() => listaEjercicios);
-            }
+            });
         }
-        public Task<Ejercicio?> GetEjercicioAsync(int id)
+        public Task<Ejercicio> GetEjercicioAsync(int id)
         {
-            using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
+            return Task.Run(() =>
             {
-                if(id > 0) 
+                using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
                 {
-                    fs.Seek(_sumaTotal * (id - 1), SeekOrigin.Begin);
-                    var a = new byte[_sumaTotal];
-                    fs.Read(a, 0, _sumaTotal);
-                    string ejercicio = Encoding.ASCII.GetString(a);
-                    if (ejercicio.Substring(0, 1) == "1")
+                    if (id > 0)
                     {
-                        return Task.FromResult(TextToEjercicio(ejercicio));
-                    }
-                    else
-                    {
-                        return Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
+                        fs.Seek(_sumaTotal * (id - 1), SeekOrigin.Begin);
+                        var a = new byte[_sumaTotal];
+                        fs.Read(a, 0, _sumaTotal);
+                        string ejercicio = Encoding.ASCII.GetString(a);
+                        if (ejercicio.Substring(0, 1) == "1")
+                        {
+                            return TextToEjercicio(ejercicio);
+                        }
                     }
                 }
-                return Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
-            }
+                return new Ejercicio() { Id = -1, Nombre = "No existe." };
+            });
         }
         private Ejercicio TextToEjercicio(string item)
         {
@@ -130,14 +132,32 @@ namespace Data
                 Dificultad = Int32.Parse(dificultad),
                 Basico = basico.Equals("True"),
                 MaterialNecesario = material,
-                FechaCreacion = DateTime.Parse(fecha),
+                FechaModificacion = DateTime.Parse(fecha),
                 MusculosInvolucrados = musculos.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList()
             } ?? new Ejercicio() { Id = -1, Nombre = "No existe." };
         }
-        public async Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date)
+        public Task<List<Ejercicio>> GetEjerciciosFechaAsync(DateTime date)
         {
 
-            return await Task.Run(() => new List<Ejercicio>());
+            return Task.Run(() =>
+            {
+                using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
+                {
+                    List<Ejercicio> listaEjercicios = new List<Ejercicio>();
+                    var cont = fs.Length / _sumaTotal;
+                    for (long i = 0; i < cont; i++)
+                    {
+                        var a = new byte[_sumaTotal];
+                        fs.Read(a, 0, _sumaTotal);
+                        var ejercicio = TextToEjercicio(Encoding.ASCII.GetString(a));
+                        if (ejercicio.FechaModificacion.Year == date.Year && ejercicio.FechaModificacion.Month == date.Month && ejercicio.FechaModificacion.Day == date.Day)
+                        {
+                            listaEjercicios.Add(ejercicio);
+                        } 
+                    }
+                    return listaEjercicios;
+                }
+            });
         }
     }
 }

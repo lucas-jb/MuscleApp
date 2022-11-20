@@ -53,7 +53,7 @@ namespace Data
                     Dificultad = Int32.Parse(subs[3]),
                     Basico = subs[4].Equals("true"),
                     MaterialNecesario = subs[5],
-                    FechaCreacion = DateTime.Parse(subs[6]),
+                    FechaModificacion = DateTime.Parse(subs[6]),
                     MusculosInvolucrados = subs[7].Split(",", StringSplitOptions.RemoveEmptyEntries).ToList()
                 };
             }
@@ -109,18 +109,21 @@ namespace Data
             return false;
         }
 
-        public async Task<List<Ejercicio>?> GetAllEjerciciosAsync()
+        public Task<List<Ejercicio>> GetAllEjerciciosAsync()
         {
-            if (_repo is not null)
+            return Task.Run(() =>
             {
-                return await Task.FromResult(_repo);
-            }
-            return await Task.Run(() => new List<Ejercicio>());
+                if (_repo is not null)
+                {
+                    return _repo;
+                }
+                return new List<Ejercicio>();
+            });
         }
 
-        public Task<Ejercicio?> GetEjercicioAsync(int id)
+        public Task<Ejercicio> GetEjercicioAsync(int id)
         {
-            Task<Ejercicio> task = new Task<Ejercicio>(() =>
+            return Task.Run(() =>
             {
                 var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
                 if (ejercicio is not null)
@@ -129,31 +132,26 @@ namespace Data
                 }
                  return new Ejercicio() { Id = -1, Nombre = "No existe." };
             });
-
-            task.Start();
-            //var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
-            //if (ejercicio is not null)
-            //{
-            //    return await Task.FromResult(ejercicio);
-            //}
-            return task;
         }
 
-        public async Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date)
+        public Task<List<Ejercicio>> GetEjerciciosFechaAsync(DateTime date)
         {
-            if (_repo is not null)
+            return Task.Run(() =>
             {
-                List<Ejercicio> lista = new List<Ejercicio>();
-                foreach (var item in _repo)
+                if (_repo is not null)
                 {
-                    if (item.FechaCreacion.Year == date.Year && item.FechaCreacion.Month == date.Month && item.FechaCreacion.Day == date.Day)
+                    List<Ejercicio> lista = new List<Ejercicio>();
+                    foreach (var item in _repo)
                     {
-                        lista.Add(item);
+                        if (item.FechaModificacion.Year == date.Year && item.FechaModificacion.Month == date.Month && item.FechaModificacion.Day == date.Day)
+                        {
+                            lista.Add(item);
+                        }
                     }
+                    return lista;
                 }
-                return await Task.FromResult(lista);
-            }
-            return await Task.Run(() => new List<Ejercicio>());
+                return new List<Ejercicio>();
+            });
         }
     }
 }

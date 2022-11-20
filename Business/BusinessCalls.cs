@@ -9,7 +9,7 @@ namespace Business
 {
     public static class BusinessCalls
     {
-        public static IDataAccess _context { get; set; } =  new Data.DataAccessFichero();
+        public static IDataAccess _context { get; set; } =  new Data.DataAccessBytes();
 
         public static void ChangeDataAccess(int num)
         {
@@ -34,17 +34,17 @@ namespace Business
             }
         }
 
-        public static Ejercicio DameEjercicio(int id)
+        public static Task<Ejercicio> DameEjercicio(int id)
         {
-            return _context.GetEjercicioAsync(id).Result ?? new Ejercicio() { Id=-1, Nombre="No existe."};
+            return _context.GetEjercicioAsync(id);
         }
-        public static List<Ejercicio> DameEjerciciosFecha(DateTime date)
+        public static Task<List<Ejercicio>> DameEjerciciosFecha(DateTime date)
         {
-            return _context.GetEjerciciosFechaAsync(date).Result ?? new List<Ejercicio>();
+            return  _context.GetEjerciciosFechaAsync(date);
         }
-        public static List<Ejercicio> DameAllEjercicio()
+        public static Task<List<Ejercicio>> DameAllEjercicio()
         {
-            return _context.GetAllEjerciciosAsync().Result ?? new List<Ejercicio>();
+            return _context.GetAllEjerciciosAsync();
         }
         public static bool DeleteEjercicio(int id)
         {
@@ -71,7 +71,8 @@ namespace Business
                         Descripcion = datos[2],
                         Dificultad = Int32.Parse(datos[3]),
                         Basico = datos[4].Equals("Si"),
-                        MaterialNecesario = datos[5]
+                        MaterialNecesario = datos[5],
+                        FechaModificacion = DateTime.Now
                     };
                 }
                 catch

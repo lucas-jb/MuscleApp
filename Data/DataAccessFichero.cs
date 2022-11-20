@@ -81,40 +81,49 @@ namespace Data
             return false;
         }
 
-        public async Task<List<Ejercicio>?> GetAllEjerciciosAsync()
+        public Task<List<Ejercicio>> GetAllEjerciciosAsync()
         {
-            if (_repo is not null)
+            return Task.Run(() =>
             {
-                return await Task.FromResult(_repo);
-            }
-            return await Task.Run(() => new List<Ejercicio>());
-        }
-
-        public async Task<Ejercicio?> GetEjercicioAsync(int id)
-        {
-            var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
-            if (ejercicio is not null)
-            {
-                return await Task.FromResult(ejercicio);
-            }
-            return await Task.FromResult(new Ejercicio() { Id = -1, Nombre = "No existe." });
-        }
-
-        public async Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date)
-        {
-            if (_repo is not null)
-            {
-                List<Ejercicio> lista = new List<Ejercicio>();
-                foreach (var item in _repo)
+                if (_repo is not null)
                 {
-                    if(item.FechaCreacion.Year == date.Year && item.FechaCreacion.Month == date.Month && item.FechaCreacion.Day == date.Day)
-                    {
-                        lista.Add(item);
-                    }
+                    return _repo;
                 }
-                return await Task.FromResult(lista);
-            }
-            return await Task.Run(() => new List<Ejercicio>());
+                return new List<Ejercicio>();
+            });
+        }
+
+        public Task<Ejercicio> GetEjercicioAsync(int id)
+        {
+            return Task.Run(() =>
+            {
+                var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
+                if (ejercicio is not null)
+                {
+                    return ejercicio;
+                }
+                return new Ejercicio() { Id = -1, Nombre = "No existe." };
+            });
+        }
+
+        public Task<List<Ejercicio>> GetEjerciciosFechaAsync(DateTime date)
+        {
+            return Task.Run(() =>
+            {
+                if (_repo is not null)
+                {
+                    List<Ejercicio> lista = new List<Ejercicio>();
+                    foreach (var item in _repo)
+                    {
+                        if (item.FechaModificacion.Year == date.Year && item.FechaModificacion.Month == date.Month && item.FechaModificacion.Day == date.Day)
+                        {
+                            lista.Add(item);
+                        }
+                    }
+                    return lista;
+                }
+                return new List<Ejercicio>();
+            });
         }
     }
 }

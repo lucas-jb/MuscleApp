@@ -34,14 +34,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dificultad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Basico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaterialNecesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MusculosInvolucrados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelinfo = new System.Windows.Forms.Label();
@@ -52,6 +44,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.comboBoxModos = new System.Windows.Forms.ComboBox();
             this.labelModo = new System.Windows.Forms.Label();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dificultad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Basico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaterialNecesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MusculosInvolucrados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaModificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -116,61 +116,13 @@
             this.Basico,
             this.MaterialNecesario,
             this.MusculosInvolucrados,
-            this.FechaCreacion});
+            this.FechaModificacion});
             this.dataGridView1.Location = new System.Drawing.Point(345, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(843, 360);
             this.dataGridView1.TabIndex = 7;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            // 
-            // Dificultad
-            // 
-            this.Dificultad.HeaderText = "Dificultad";
-            this.Dificultad.Name = "Dificultad";
-            this.Dificultad.ReadOnly = true;
-            // 
-            // Basico
-            // 
-            this.Basico.HeaderText = "Basico";
-            this.Basico.Name = "Basico";
-            this.Basico.ReadOnly = true;
-            // 
-            // MaterialNecesario
-            // 
-            this.MaterialNecesario.HeaderText = "Material necesario";
-            this.MaterialNecesario.Name = "MaterialNecesario";
-            this.MaterialNecesario.ReadOnly = true;
-            // 
-            // MusculosInvolucrados
-            // 
-            this.MusculosInvolucrados.HeaderText = "Musculos involucrados";
-            this.MusculosInvolucrados.Name = "MusculosInvolucrados";
-            this.MusculosInvolucrados.ReadOnly = true;
-            // 
-            // FechaCreacion
-            // 
-            this.FechaCreacion.HeaderText = "Fecha de creación";
-            this.FechaCreacion.Name = "FechaCreacion";
-            this.FechaCreacion.ReadOnly = true;
             // 
             // btnEliminar
             // 
@@ -268,7 +220,55 @@
             this.labelModo.Name = "labelModo";
             this.labelModo.Size = new System.Drawing.Size(73, 15);
             this.labelModo.TabIndex = 20;
-            this.labelModo.Text = "Modo JSON.";
+            this.labelModo.Text = "Modo bytes.";
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // Dificultad
+            // 
+            this.Dificultad.HeaderText = "Dificultad";
+            this.Dificultad.Name = "Dificultad";
+            this.Dificultad.ReadOnly = true;
+            // 
+            // Basico
+            // 
+            this.Basico.HeaderText = "Basico";
+            this.Basico.Name = "Basico";
+            this.Basico.ReadOnly = true;
+            // 
+            // MaterialNecesario
+            // 
+            this.MaterialNecesario.HeaderText = "Material necesario";
+            this.MaterialNecesario.Name = "MaterialNecesario";
+            this.MaterialNecesario.ReadOnly = true;
+            // 
+            // MusculosInvolucrados
+            // 
+            this.MusculosInvolucrados.HeaderText = "Musculos involucrados";
+            this.MusculosInvolucrados.Name = "MusculosInvolucrados";
+            this.MusculosInvolucrados.ReadOnly = true;
+            // 
+            // FechaModificacion
+            // 
+            this.FechaModificacion.HeaderText = "Fecha de modificación";
+            this.FechaModificacion.Name = "FechaModificacion";
+            this.FechaModificacion.ReadOnly = true;
             // 
             // Form1
             // 
@@ -309,14 +309,6 @@
         private Button button3;
         private Button btnEditar;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewTextBoxColumn Descripcion;
-        private DataGridViewTextBoxColumn Dificultad;
-        private DataGridViewTextBoxColumn Basico;
-        private DataGridViewTextBoxColumn MaterialNecesario;
-        private DataGridViewTextBoxColumn MusculosInvolucrados;
-        private DataGridViewTextBoxColumn FechaCreacion;
         private Button btnEliminar;
         private PictureBox pictureBox1;
         private Label labelinfo;
@@ -327,5 +319,13 @@
         private Button button1;
         private ComboBox comboBoxModos;
         private Label labelModo;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Dificultad;
+        private DataGridViewTextBoxColumn Basico;
+        private DataGridViewTextBoxColumn MaterialNecesario;
+        private DataGridViewTextBoxColumn MusculosInvolucrados;
+        private DataGridViewTextBoxColumn FechaModificacion;
     }
 }

@@ -11,34 +11,37 @@ namespace ViewForm
             InitializeComponent();
         }
 
-        private void btnCrear_Click(object sender, EventArgs e)
+        private async void btnCrear_Click(object sender, EventArgs e)
         {
             FormAdd.editar = false;
-            FormAdd.id = Business.BusinessCalls.DameAllEjercicio().Count();
+            var ejercicio = await Business.BusinessCalls.DameAllEjercicio();
+            FormAdd.id = ejercicio.Count();
             FormAdd.Show();
             FormAdd.Cambiar(true);
             FormAdd.LimpiarCampos();
             this.Hide();
         }
 
-        private void btnEditar_Click(object sender, EventArgs e)
+        private async void btnEditar_Click(object sender, EventArgs e)
         {
-            if (IsValid(textBox1))
+            if (await IsValid(textBox1))
             {
                 int id = Int32.Parse(textBox1.Text);
                 FormAdd.editar = true;
                 FormAdd.id = id;
-                FormAdd.RellenarCampos(Business.BusinessCalls.DameEjercicio(id));
+                var ejericio = await Business.BusinessCalls.DameEjercicio(id);
+                FormAdd.RellenarCampos(ejericio);
                 FormAdd.Show();
                 FormAdd.Cambiar(false);
                 this.Hide();
             }
         }
-        private bool IsValid(TextBox texbox)
+        private async Task<bool> IsValid(TextBox texbox)
         {
             if(textBox1.Text != string.Empty){
                 int id = Int32.Parse(textBox1.Text);
-                if (Business.BusinessCalls.DameEjercicio(id).DameString() is not null)
+                var ejercicio = await Business.BusinessCalls.DameEjercicio(id);
+                if (ejercicio.DameString() is not null)
                 {
                     return true;
                 }
@@ -46,10 +49,10 @@ namespace ViewForm
             return false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
-            var listejercitos = Business.BusinessCalls.DameAllEjercicio();
+            var listejercitos = await Business.BusinessCalls.DameAllEjercicio();
             MostrarTabla(listejercitos);
         }
 
@@ -58,7 +61,7 @@ namespace ViewForm
             int cont = 0;
             foreach (Ejercicio ej in lista)
             {
-                this.dataGridView1.Rows.Insert(cont, ej.Id.ToString(), ej.Nombre, ej.Descripcion, ej.Dificultad.ToString(), ej.Basico.ToString(), ej.MaterialNecesario, "Musculos", ej.FechaCreacion.ToString());
+                this.dataGridView1.Rows.Insert(cont, ej.Id.ToString(), ej.Nombre, ej.Descripcion, ej.Dificultad.ToString(), ej.Basico.ToString(), ej.MaterialNecesario, "Musculos", ej.FechaModificacion.ToString());
             }
         }
 
@@ -74,9 +77,9 @@ namespace ViewForm
             }
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private async void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (IsValid(textBox1))
+            if (await IsValid(textBox1))
             {
                 int id = Int32.Parse(textBox1.Text);
                 if (Business.BusinessCalls.DeleteEjercicio(id))
@@ -95,11 +98,12 @@ namespace ViewForm
             Business.BusinessCalls.ReloadFichero();
         }
 
-        private void btnMostrarPorFecha_Click(object sender, EventArgs e)
+        private async void btnMostrarPorFecha_Click(object sender, EventArgs e)
         {
             DateTime date = dateTimePicker1.Value;
             dataGridView1.Rows.Clear();
-            List<Ejercicio> list = Business.BusinessCalls.DameEjerciciosFecha(date);
+            var ejercicio = await Business.BusinessCalls.DameEjerciciosFecha(date);
+            List<Ejercicio> list = ejercicio;
             MostrarTabla(list);
         }
 
@@ -108,14 +112,15 @@ namespace ViewForm
             Checkeo();
         }
 
-        public void Checkeo()
+        public async void Checkeo()
         {
-            if (IsValid(textBox1))
+            if (await IsValid(textBox1))
             {
                 dataGridView1.Rows.Clear();
                 int id = Int32.Parse(textBox1.Text);
                 List<Ejercicio> list = new List<Ejercicio>();
-                list.Add(Business.BusinessCalls.DameEjercicio(id));
+                var ejercicio = await Business.BusinessCalls.DameEjercicio(id);
+                list.Add(ejercicio);
                 MostrarTabla(list);
             }
         }

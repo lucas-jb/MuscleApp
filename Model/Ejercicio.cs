@@ -15,7 +15,7 @@ namespace Model
         public bool Basico { get; set; }
         public string MaterialNecesario { get; set; } = string.Empty;
         public List<string> MusculosInvolucrados { get; set; } = new List<string>();
-        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaModificacion { get; set; }
 
         public string DameString()
         {
@@ -26,7 +26,7 @@ namespace Model
                     "Dificultad = " + Dificultad.ToString() + Environment.NewLine + 
                     "Basico = " + Basico.ToString() + Environment.NewLine + 
                     "MaterialNecesario = " + MaterialNecesario + Environment.NewLine +
-                    "FechaCreacion = " + FechaCreacion.ToString() + Environment.NewLine +
+                    "FechaCreacion = " + FechaModificacion.ToString() + Environment.NewLine +
                     "MusculosInvolucrados = " + Environment.NewLine + DameMusculos();
     }
 
@@ -46,7 +46,7 @@ namespace Model
 
         public string toText()
         {
-            return "%" + Id.ToString() + ";" + Nombre + ";" + Descripcion + ";" + Dificultad.ToString() + ";" + Basico.ToString() + ";" + MaterialNecesario + ";" + FechaCreacion.ToString() + ";" + DameMusculos();
+            return "%" + Id.ToString() + ";" + Nombre + ";" + Descripcion + ";" + Dificultad.ToString() + ";" + Basico.ToString() + ";" + MaterialNecesario + ";" + FechaModificacion.ToString() + ";" + DameMusculos();
         }
     }
 

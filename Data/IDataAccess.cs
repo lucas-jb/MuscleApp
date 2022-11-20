@@ -9,9 +9,9 @@ namespace Data
 {
     public interface IDataAccess
     {
-        Task<Ejercicio?> GetEjercicioAsync(int id);
-        Task<List<Ejercicio>?> GetEjerciciosFechaAsync(DateTime date);
-        Task<List<Ejercicio>?> GetAllEjerciciosAsync();
+        Task<Ejercicio> GetEjercicioAsync(int id);
+        Task<List<Ejercicio>> GetEjerciciosFechaAsync(DateTime date);
+        Task<List<Ejercicio>> GetAllEjerciciosAsync();
         public bool CreateEjercicio(Ejercicio ejercicio);
         public bool DeleteEjercicio(int id);
         public bool EditEjercicio(Ejercicio ejercicio);
