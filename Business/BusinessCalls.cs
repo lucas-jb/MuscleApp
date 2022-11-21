@@ -10,7 +10,6 @@ namespace Business
     public static class BusinessCalls
     {
         public static IDataAccess _context { get; set; } =  new Data.DataAccessBytes();
-
         public static void ChangeDataAccess(int num)
         {
             if(num == 0)
@@ -33,7 +32,6 @@ namespace Business
                 _context = new Data.DataAccessBytes();
             }
         }
-
         public static Task<Ejercicio> DameEjercicio(int id)
         {
             return _context.GetEjercicioAsync(id);
@@ -86,7 +84,6 @@ namespace Business
         {
             return _context.UpdateFichero();
         }
-
         public static bool ReloadFichero()
         {
             return _context.ReloadFichero();
