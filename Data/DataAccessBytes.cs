@@ -11,6 +11,7 @@ namespace Data
     {
         private string _ruta = "..\\..\\..\\..\\Data\\Files\\ejerciciosBytes.txt";
         private int _sumaTotal = 347;
+        private int sleep = 4000;
         public DataAccessBytes()
         {
             var id = new byte[5];
@@ -79,6 +80,7 @@ namespace Data
         {
             return Task.Run(() =>
             {
+                Thread.Sleep(sleep);
                 using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
                 {
                     List<Ejercicio> listaEjercicios = new List<Ejercicio>();
@@ -97,6 +99,7 @@ namespace Data
         {
             return Task.Run(() =>
             {
+                Thread.Sleep(sleep);
                 using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
                 {
                     if (id > 0)
@@ -138,9 +141,9 @@ namespace Data
         }
         public Task<List<Ejercicio>> GetEjerciciosFechaAsync(DateTime date)
         {
-
             return Task.Run(() =>
             {
+                Thread.Sleep(sleep);
                 using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
                 {
                     List<Ejercicio> listaEjercicios = new List<Ejercicio>();
