@@ -11,6 +11,7 @@ namespace Data
     {
         private string _ruta = "..\\..\\..\\..\\Data\\Files\\ejerciciosBytes.txt";
         private int _sumaTotal = 347;
+        private int _cabecera = 105;
         private int sleep = 4000;
         public DataAccessBytes()
         {
@@ -62,7 +63,7 @@ namespace Data
         {
             using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Write))
             {
-                fs.Seek(_sumaTotal * id, SeekOrigin.Begin);
+                fs.Seek(_cabecera + (_sumaTotal * id), SeekOrigin.Begin);
                 fs.Write(Encoding.ASCII.GetBytes("0"));
             }
             return false;
@@ -71,7 +72,7 @@ namespace Data
         {
             using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Write))
             {
-                fs.Seek(_sumaTotal * (ejercicio.Id - 1), SeekOrigin.Begin);
+                fs.Seek(_cabecera + (_sumaTotal * (ejercicio.Id - 1)), SeekOrigin.Begin);
                 fs.Write(Encoding.ASCII.GetBytes(EjercicioToText(ejercicio)));
             }
             return false;
@@ -84,7 +85,8 @@ namespace Data
                 using (FileStream fs = new FileStream(_ruta, FileMode.Open, FileAccess.Read))
                 {
                     List<Ejercicio> listaEjercicios = new List<Ejercicio>();
-                    var cont = fs.Length / _sumaTotal;
+                    var cont = (fs.Length-_cabecera) / _sumaTotal;
+                    fs.Seek(_cabecera,SeekOrigin.Begin);
                     for (long i = 0; i < cont; i++)
                     {
                         var a = new byte[_sumaTotal];
@@ -104,7 +106,7 @@ namespace Data
                 {
                     if (id > 0)
                     {
-                        fs.Seek(_sumaTotal * (id - 1), SeekOrigin.Begin);
+                        fs.Seek(_cabecera + (_sumaTotal * (id - 1)), SeekOrigin.Begin);
                         var a = new byte[_sumaTotal];
                         fs.Read(a, 0, _sumaTotal);
                         string ejercicio = Encoding.ASCII.GetString(a);
