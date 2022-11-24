@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ejercicios>
+	<ejercicio id='0'>
+        <nombre>Ejercicio1</nombre>
+        <descripcion>Descripcion1</descripcion>
+        <dificultad>5</dificultad>
+        <basico>True</basico>
+        <materialNecesario>Material necesario 1</materialNecesario>
+        <fechaCreacion></fechaCreacion>
+        <musculosInvolucrados>
+            <musculo>Pectoral</musculo>
+            <musculo>Triceps</musculo>
+        </musculosInvolucrados>
+	</ejercicio>
+</ejercicios>
