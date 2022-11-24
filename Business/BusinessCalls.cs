@@ -30,6 +30,10 @@ namespace Business
             if (num == 3)
             {
                 _context = new Data.DataAccessBytes();
+            }else
+            if (num == 4)
+            {
+                _context = new Data.DataAccessBytes();
             }
         }
         public static Task<Ejercicio> DameEjercicio(int id)
