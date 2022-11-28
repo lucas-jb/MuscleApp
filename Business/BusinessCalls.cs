@@ -9,7 +9,7 @@ namespace Business
 {
     public static class BusinessCalls
     {
-        public static IDataAccess _context { get; set; } =  new Data.DataAccessBytes();
+        public static IDataAccess _context { get; set; } =  new Data.DataAccessXML();
         public static void ChangeDataAccess(int num)
         {
             if(num == 0)
@@ -33,7 +33,7 @@ namespace Business
             }else
             if (num == 4)
             {
-                _context = new Data.DataAccessBytes();
+                _context = new Data.DataAccessXML();
             }
         }
         public static Task<Ejercicio> DameEjercicio(int id)

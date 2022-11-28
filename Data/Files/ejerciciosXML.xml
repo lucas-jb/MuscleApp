@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ejercicios>
-	<ejercicio id='0'>
+	<ejercicio id='1'>
         <nombre>Ejercicio1</nombre>
         <descripcion>Descripcion1</descripcion>
         <dificultad>5</dificultad>
@@ -11,5 +11,17 @@
             <musculo>Pectoral</musculo>
             <musculo>Triceps</musculo>
         </musculosInvolucrados>
+	</ejercicio>
+	<ejercicio id='2'>
+		<nombre>Ejercicio2</nombre>
+		<descripcion>Descripcion2</descripcion>
+		<dificultad>5</dificultad>
+		<basico>True</basico>
+		<materialNecesario>Material necesario 2</materialNecesario>
+		<fechaCreacion></fechaCreacion>
+		<musculosInvolucrados>
+			<musculo>Pectoral</musculo>
+			<musculo>Triceps</musculo>
+		</musculosInvolucrados>
 	</ejercicio>
 </ejercicios>

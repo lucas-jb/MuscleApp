@@ -12,6 +12,7 @@ namespace Data
     {
         XmlDocument xmlDocument = new XmlDocument();
         string xmlText = string.Empty;
+        private string _ruta = "..\\..\\..\\..\\Data\\Files\\ejerciciosXML.xml";
 
         public bool CreateEjercicio(Ejercicio ejercicio)
         {
@@ -30,12 +31,136 @@ namespace Data
 
         public Task<List<Ejercicio>> GetAllEjerciciosAsync()
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+            {
+                Thread.Sleep(0);
+                List<Ejercicio> listaresultado = new List<Ejercicio>();
+
+                string _id = string.Empty;
+                string _nombre = string.Empty;
+                string _descripcion = string.Empty;
+                string _basico = string.Empty;
+                string _material = string.Empty;
+                string _fecha = string.Empty;
+                string _dificultad = string.Empty;
+                string _musculos = string.Empty;
+
+                xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(File.ReadAllText(_ruta));
+                XmlNodeList nodos = xmlDocument.GetElementsByTagName("ejercicio");
+
+                foreach (XmlNode a in nodos)
+                {
+                    _id = a.Attributes.GetNamedItem("id").Value;
+
+                    foreach (XmlNode aux in a.ChildNodes)
+                    {
+                        if (aux.Name == "nombre")
+                        {
+                            _nombre = aux.InnerText;
+                        }
+                        else if (aux.Name == "descripcion")
+                        {
+                            _descripcion = aux.InnerText;
+                        }
+                        else if (aux.Name == "basico")
+                        {
+                            _basico = aux.InnerText;
+                        }
+                        else if (aux.Name == "material")
+                        {
+                            _material = aux.InnerText;
+                        }
+                        else if (aux.Name == "fecha")
+                        {
+                            _fecha = aux.InnerText;
+                        }
+                        else if (aux.Name == "dificultad")
+                        {
+                            _dificultad = aux.InnerText;
+                        }
+                    }
+                    Ejercicio ejercicio = new Ejercicio()
+                    {
+                        Id = Int32.Parse(_id),
+                        Nombre = _nombre,
+                        Descripcion = _descripcion,
+                        Dificultad = Int32.Parse(_dificultad),
+                        Basico = _basico.Equals("True"),
+                        MaterialNecesario = _material,
+                        FechaModificacion = DateTime.Now
+                    };
+                    listaresultado.Add(ejercicio);
+                }
+                return listaresultado;
+            });
         }
 
         public Task<Ejercicio> GetEjercicioAsync(int id)
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+            {
+                Thread.Sleep(0);
+
+                string _id = string.Empty;
+                string _nombre = string.Empty;
+                string _descripcion = string.Empty;
+                string _basico = string.Empty;
+                string _material = string.Empty;
+                string _fecha = string.Empty;
+                string _dificultad = string.Empty;
+                string _musculos = string.Empty;
+
+                xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(File.ReadAllText(_ruta));
+                XmlNodeList nodos = xmlDocument.GetElementsByTagName("ejercicio");
+
+                foreach (XmlNode a in nodos)
+                {
+                    if(id == a.Attributes.GetNamedItem("id").Value)
+                    {
+
+                    }
+
+                    foreach (XmlNode aux in a.ChildNodes)
+                    {
+                        if (aux.Name == "nombre")
+                        {
+                            _nombre = aux.InnerText;
+                        }
+                        else if (aux.Name == "descripcion")
+                        {
+                            _descripcion = aux.InnerText;
+                        }
+                        else if (aux.Name == "basico")
+                        {
+                            _basico = aux.InnerText;
+                        }
+                        else if (aux.Name == "material")
+                        {
+                            _material = aux.InnerText;
+                        }
+                        else if (aux.Name == "fecha")
+                        {
+                            _fecha = aux.InnerText;
+                        }
+                        else if (aux.Name == "dificultad")
+                        {
+                            _dificultad = aux.InnerText;
+                        }
+                    }
+                    return new Ejercicio()
+                    {
+                        Id = Int32.Parse(_id),
+                        Nombre = _nombre,
+                        Descripcion = _descripcion,
+                        Dificultad = Int32.Parse(_dificultad),
+                        Basico = _basico.Equals("True"),
+                        MaterialNecesario = _material,
+                        FechaModificacion = DateTime.Now
+                    };
+                }
+            });
         }
 
         public Task<List<Ejercicio>> GetEjerciciosFechaAsync(DateTime date)
@@ -45,8 +170,7 @@ namespace Data
 
         public bool ReloadFichero()
         {
-            xmlText = File.ReadAllText("XMLfrutas.xml");
-            xmlDocument.LoadXml(xmlText);
+            xmlDocument.Load(_ruta);
             return true;
         }
 
