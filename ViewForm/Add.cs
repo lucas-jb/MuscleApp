@@ -15,9 +15,9 @@ namespace ViewForm
     public partial class Add : Form
     {
         public bool editar { get; set; } = false;
-        public Form1 form1;
+        public PanelPrincipal form1;
         public int id { get; set; } = -1;
-        public Add(Form1 form1)
+        public Add(PanelPrincipal form1)
         {
             this.form1 = form1;
             InitializeComponent();

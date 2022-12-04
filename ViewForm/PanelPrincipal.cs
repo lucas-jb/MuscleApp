@@ -2,10 +2,10 @@ using Business;
 using Model;
 namespace ViewForm
 {
-    public partial class Form1 : Form
+    public partial class PanelPrincipal : Form
     {
         public Add FormAdd;
-        public Form1()
+        public PanelPrincipal()
         {
             FormAdd = new Add(this);
             InitializeComponent();
@@ -158,6 +158,12 @@ namespace ViewForm
             {
                 labelModo.Text = "Modo bytes.";
                 BusinessCalls.ChangeDataAccess(3);
+            }
+            else
+            if (comboBoxModos.SelectedIndex == 4)
+            {
+                labelModo.Text = "Modo XML.";
+                BusinessCalls.ChangeDataAccess(4);
             }
             Checkeo();
         }

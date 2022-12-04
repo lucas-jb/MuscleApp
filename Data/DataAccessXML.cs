@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -12,21 +13,77 @@ namespace Data
     {
         XmlDocument xmlDocument = new XmlDocument();
         string xmlText = string.Empty;
-        private string _ruta = "..\\..\\..\\..\\Data\\Files\\ejerciciosXML.xml";
+        private string _path = "..\\..\\..\\..\\Data\\Files\\ejerciciosXML.xml";
 
         public bool CreateEjercicio(Ejercicio ejercicio)
         {
-            throw new NotImplementedException();
+            if(ejercicio is not null)
+            {
+                xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(File.ReadAllText(_path));
+                XmlNode Nodeejercicio = xmlDocument.CreateElement("ejercicio");
+                XmlAttribute idAttribute = xmlDocument.CreateAttribute("id");
+                idAttribute.Value = ejercicio.Id.ToString();
+                Nodeejercicio.Attributes.Append(idAttribute);
+
+                Type _type = ejercicio.GetType();
+
+                System.Reflection.PropertyInfo[] listaPropiedades = _type.GetProperties();
+
+                foreach (System.Reflection.PropertyInfo propiedad in listaPropiedades)
+                {
+                    if (propiedad.Name != "Id")
+                    {
+                        XmlNode node = xmlDocument.CreateElement(propiedad.Name);
+                        XmlText nodeText = xmlDocument.CreateTextNode(propiedad.GetValue(ejercicio, null).ToString());
+                        node.AppendChild(nodeText);
+                        Nodeejercicio.AppendChild(node);
+                    }
+                }
+                xmlDocument.FirstChild.NextSibling.AppendChild(Nodeejercicio);
+                xmlDocument.Save(_path);
+                return true;
+            }
+            return false;
         }
 
         public bool DeleteEjercicio(int id)
         {
-            throw new NotImplementedException();
+            if (GetEjercicioAsync(id).Id != -1)
+            {
+                xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(File.ReadAllText(_path));
+                XmlNodeList nodos = xmlDocument.GetElementsByTagName("ejercicio");
+                XmlNode ejercicioBorrar = null;
+
+                string _id = id.ToString();
+                foreach (XmlNode a in nodos)
+                {
+                    if (_id.Equals(a.Attributes.GetNamedItem("id").Value))
+                    {
+                        ejercicioBorrar = a;
+                        break;
+                    }
+                }
+                if(ejercicioBorrar != null)
+                {
+                    xmlDocument.FirstChild.NextSibling.RemoveChild(ejercicioBorrar);
+                    xmlDocument.Save(_path);
+                    return true;
+                }
+                return false;
+            }
+            return false;
         }
 
         public bool EditEjercicio(Ejercicio ejercicio)
         {
-            throw new NotImplementedException();
+            if(DeleteEjercicio(ejercicio.Id)!= false)
+            {
+                CreateEjercicio(ejercicio);
+                return true;
+            }
+            return false;
         }
 
         public Task<List<Ejercicio>> GetAllEjerciciosAsync()
@@ -46,7 +103,7 @@ namespace Data
                 string _musculos = string.Empty;
 
                 xmlDocument = new XmlDocument();
-                xmlDocument.LoadXml(File.ReadAllText(_ruta));
+                xmlDocument.LoadXml(File.ReadAllText(_path));
                 XmlNodeList nodos = xmlDocument.GetElementsByTagName("ejercicio");
 
                 foreach (XmlNode a in nodos)
@@ -55,27 +112,27 @@ namespace Data
 
                     foreach (XmlNode aux in a.ChildNodes)
                     {
-                        if (aux.Name == "nombre")
+                        if (aux.Name == "Nombre")
                         {
                             _nombre = aux.InnerText;
                         }
-                        else if (aux.Name == "descripcion")
+                        else if (aux.Name == "Descripcion")
                         {
                             _descripcion = aux.InnerText;
                         }
-                        else if (aux.Name == "basico")
+                        else if (aux.Name == "Basico")
                         {
                             _basico = aux.InnerText;
                         }
-                        else if (aux.Name == "material")
+                        else if (aux.Name == "MaterialNecesario")
                         {
                             _material = aux.InnerText;
                         }
-                        else if (aux.Name == "fecha")
+                        else if (aux.Name == "FechaModificacion")
                         {
                             _fecha = aux.InnerText;
                         }
-                        else if (aux.Name == "dificultad")
+                        else if (aux.Name == "Dificultad")
                         {
                             _dificultad = aux.InnerText;
                         }
@@ -102,7 +159,7 @@ namespace Data
             {
                 Thread.Sleep(0);
 
-                string _id = string.Empty;
+                string _id = id.ToString();
                 string _nombre = string.Empty;
                 string _descripcion = string.Empty;
                 string _basico = string.Empty;
@@ -112,54 +169,53 @@ namespace Data
                 string _musculos = string.Empty;
 
                 xmlDocument = new XmlDocument();
-                xmlDocument.LoadXml(File.ReadAllText(_ruta));
+                xmlDocument.LoadXml(File.ReadAllText(_path));
                 XmlNodeList nodos = xmlDocument.GetElementsByTagName("ejercicio");
 
                 foreach (XmlNode a in nodos)
                 {
-                    if(id == a.Attributes.GetNamedItem("id").Value)
+                    if(_id.Equals(a.Attributes.GetNamedItem("id").Value))
                     {
-
+                        foreach (XmlNode aux in a.ChildNodes)
+                        {
+                            if (aux.Name == "Nombre")
+                            {
+                                _nombre = aux.InnerText;
+                            }
+                            else if (aux.Name == "Descripcion")
+                            {
+                                _descripcion = aux.InnerText;
+                            }
+                            else if (aux.Name == "Basico")
+                            {
+                                _basico = aux.InnerText;
+                            }
+                            else if (aux.Name == "MaterialNecesario")
+                            {
+                                _material = aux.InnerText;
+                            }
+                            else if (aux.Name == "FechaModificacion")
+                            {
+                                _fecha = aux.InnerText;
+                            }
+                            else if (aux.Name == "Dificultad")
+                            {
+                                _dificultad = aux.InnerText;
+                            }
+                        }
+                        return new Ejercicio()
+                        {
+                            Id = Int32.Parse(_id),
+                            Nombre = _nombre,
+                            Descripcion = _descripcion,
+                            Dificultad = Int32.Parse(_dificultad),
+                            Basico = _basico.Equals("True"),
+                            MaterialNecesario = _material,
+                            FechaModificacion = DateTime.Now
+                        };
                     }
-
-                    foreach (XmlNode aux in a.ChildNodes)
-                    {
-                        if (aux.Name == "nombre")
-                        {
-                            _nombre = aux.InnerText;
-                        }
-                        else if (aux.Name == "descripcion")
-                        {
-                            _descripcion = aux.InnerText;
-                        }
-                        else if (aux.Name == "basico")
-                        {
-                            _basico = aux.InnerText;
-                        }
-                        else if (aux.Name == "material")
-                        {
-                            _material = aux.InnerText;
-                        }
-                        else if (aux.Name == "fecha")
-                        {
-                            _fecha = aux.InnerText;
-                        }
-                        else if (aux.Name == "dificultad")
-                        {
-                            _dificultad = aux.InnerText;
-                        }
-                    }
-                    return new Ejercicio()
-                    {
-                        Id = Int32.Parse(_id),
-                        Nombre = _nombre,
-                        Descripcion = _descripcion,
-                        Dificultad = Int32.Parse(_dificultad),
-                        Basico = _basico.Equals("True"),
-                        MaterialNecesario = _material,
-                        FechaModificacion = DateTime.Now
-                    };
                 }
+                return new Ejercicio() { Id = -1, Nombre = "No existe." };
             });
         }
 
@@ -170,7 +226,7 @@ namespace Data
 
         public bool ReloadFichero()
         {
-            xmlDocument.Load(_ruta);
+            xmlDocument.Load(_path);
             return true;
         }
 

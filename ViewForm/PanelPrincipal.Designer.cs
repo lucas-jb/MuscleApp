@@ -1,6 +1,6 @@
 ﻿namespace ViewForm
 {
-    partial class Form1
+    partial class PanelPrincipal
     {
         /// <summary>
         ///  Required designer variable.
@@ -207,7 +207,8 @@
             "Modo memoria",
             "Modo JSON",
             "Modo a pelo",
-            "Modo bytes"});
+            "Modo bytes",
+            "Modo XML"});
             this.comboBoxModos.Location = new System.Drawing.Point(345, 378);
             this.comboBoxModos.Name = "comboBoxModos";
             this.comboBoxModos.Size = new System.Drawing.Size(165, 23);
@@ -220,7 +221,7 @@
             this.labelModo.Name = "labelModo";
             this.labelModo.Size = new System.Drawing.Size(73, 15);
             this.labelModo.TabIndex = 20;
-            this.labelModo.Text = "Modo bytes.";
+            this.labelModo.Text = "Modo XML.";
             // 
             // Id
             // 

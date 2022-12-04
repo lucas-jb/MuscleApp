@@ -1,27 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ejercicios>
-	<ejercicio id='1'>
-        <nombre>Ejercicio1</nombre>
-        <descripcion>Descripcion1</descripcion>
-        <dificultad>5</dificultad>
-        <basico>True</basico>
-        <materialNecesario>Material necesario 1</materialNecesario>
-        <fechaCreacion></fechaCreacion>
-        <musculosInvolucrados>
-            <musculo>Pectoral</musculo>
-            <musculo>Triceps</musculo>
-        </musculosInvolucrados>
-	</ejercicio>
-	<ejercicio id='2'>
-		<nombre>Ejercicio2</nombre>
-		<descripcion>Descripcion2</descripcion>
-		<dificultad>5</dificultad>
-		<basico>True</basico>
-		<materialNecesario>Material necesario 2</materialNecesario>
-		<fechaCreacion></fechaCreacion>
-		<musculosInvolucrados>
-			<musculo>Pectoral</musculo>
-			<musculo>Triceps</musculo>
-		</musculosInvolucrados>
-	</ejercicio>
+  <ejercicio id="1">
+    <Nombre>Ejercicio 1</Nombre>
+    <Descripcion>Descripcion</Descripcion>
+    <Dificultad>3</Dificultad>
+    <Basico>True</Basico>
+    <MaterialNecesario>Material necesario</MaterialNecesario>
+    <MusculosInvolucrados>System.Collections.Generic.List`1[System.String]</MusculosInvolucrados>
+    <FechaModificacion>04/12/2022 19:22:04</FechaModificacion>
+  </ejercicio>
+  <ejercicio id="2">
+    <Nombre>Ejercicio 2</Nombre>
+    <Descripcion>Descripcion</Descripcion>
+    <Dificultad>3</Dificultad>
+    <Basico>True</Basico>
+    <MaterialNecesario>Material necesario</MaterialNecesario>
+    <MusculosInvolucrados>System.Collections.Generic.List`1[System.String]</MusculosInvolucrados>
+    <FechaModificacion>04/12/2022 19:22:04</FechaModificacion>
+  </ejercicio>
+  <ejercicio id="4">
+    <Nombre>Ejercicio 4 - edit</Nombre>
+    <Descripcion>Descripcion</Descripcion>
+    <Dificultad>3</Dificultad>
+    <Basico>True</Basico>
+    <MaterialNecesario>Material necesario</MaterialNecesario>
+    <MusculosInvolucrados>System.Collections.Generic.List`1[System.String]</MusculosInvolucrados>
+    <FechaModificacion>04/12/2022 20:30:18</FechaModificacion>
+  </ejercicio>
 </ejercicios>
