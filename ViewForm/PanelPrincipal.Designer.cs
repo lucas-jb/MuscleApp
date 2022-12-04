@@ -28,12 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelPrincipal));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCrear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dificultad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Basico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaterialNecesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MusculosInvolucrados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaModificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelinfo = new System.Windows.Forms.Label();
@@ -44,23 +53,16 @@
             this.button1 = new System.Windows.Forms.Button();
             this.comboBoxModos = new System.Windows.Forms.ComboBox();
             this.labelModo = new System.Windows.Forms.Label();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dificultad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Basico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaterialNecesario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MusculosInvolucrados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaModificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox1.Location = new System.Drawing.Point(37, 15);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(113, 23);
+            this.textBox1.Size = new System.Drawing.Size(113, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
@@ -68,14 +70,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 18);
+            this.label1.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.label1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.Info;
+            this.label1.Location = new System.Drawing.Point(6, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(20, 15);
+            this.label1.Size = new System.Drawing.Size(25, 14);
             this.label1.TabIndex = 2;
             this.label1.Text = "Id:";
             // 
             // btnCrear
             // 
+            this.btnCrear.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCrear.Location = new System.Drawing.Point(165, 44);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(164, 23);
@@ -86,9 +92,10 @@
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button3.Location = new System.Drawing.Point(1098, 378);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 23);
+            this.button3.Size = new System.Drawing.Size(114, 23);
             this.button3.TabIndex = 5;
             this.button3.Text = "Mostrar todos";
             this.button3.UseVisualStyleBackColor = true;
@@ -96,6 +103,7 @@
             // 
             // btnEditar
             // 
+            this.btnEditar.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnEditar.Location = new System.Drawing.Point(165, 15);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(77, 23);
@@ -121,107 +129,8 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(843, 360);
+            this.dataGridView1.Size = new System.Drawing.Size(867, 360);
             this.dataGridView1.TabIndex = 7;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Location = new System.Drawing.Point(248, 15);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(81, 23);
-            this.btnEliminar.TabIndex = 8;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ViewForm.Properties.Resources.ronnie_coleman;
-            this.pictureBox1.Location = new System.Drawing.Point(14, 115);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(315, 228);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
-            // labelinfo
-            // 
-            this.labelinfo.AutoSize = true;
-            this.labelinfo.Location = new System.Drawing.Point(14, 86);
-            this.labelinfo.Name = "labelinfo";
-            this.labelinfo.Size = new System.Drawing.Size(28, 15);
-            this.labelinfo.TabIndex = 10;
-            this.labelinfo.Text = "info";
-            // 
-            // btnRestablecer
-            // 
-            this.btnRestablecer.Location = new System.Drawing.Point(209, 349);
-            this.btnRestablecer.Name = "btnRestablecer";
-            this.btnRestablecer.Size = new System.Drawing.Size(120, 23);
-            this.btnRestablecer.TabIndex = 12;
-            this.btnRestablecer.Text = "Restablecer fichero";
-            this.btnRestablecer.UseVisualStyleBackColor = true;
-            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(146, 349);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(57, 23);
-            this.btnSalir.TabIndex = 15;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(740, 378);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(228, 23);
-            this.dateTimePicker1.TabIndex = 16;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // btnMostrarPorFecha
-            // 
-            this.btnMostrarPorFecha.Location = new System.Drawing.Point(974, 378);
-            this.btnMostrarPorFecha.Name = "btnMostrarPorFecha";
-            this.btnMostrarPorFecha.Size = new System.Drawing.Size(118, 23);
-            this.btnMostrarPorFecha.TabIndex = 17;
-            this.btnMostrarPorFecha.Text = "Mostrar por fecha";
-            this.btnMostrarPorFecha.UseVisualStyleBackColor = true;
-            this.btnMostrarPorFecha.Click += new System.EventHandler(this.btnMostrarPorFecha_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(516, 378);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 23);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Cambiar modo";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // comboBoxModos
-            // 
-            this.comboBoxModos.FormattingEnabled = true;
-            this.comboBoxModos.Items.AddRange(new object[] {
-            "Modo memoria",
-            "Modo JSON",
-            "Modo a pelo",
-            "Modo bytes",
-            "Modo XML"});
-            this.comboBoxModos.Location = new System.Drawing.Point(345, 378);
-            this.comboBoxModos.Name = "comboBoxModos";
-            this.comboBoxModos.Size = new System.Drawing.Size(165, 23);
-            this.comboBoxModos.TabIndex = 19;
-            // 
-            // labelModo
-            // 
-            this.labelModo.AutoSize = true;
-            this.labelModo.Location = new System.Drawing.Point(618, 382);
-            this.labelModo.Name = "labelModo";
-            this.labelModo.Size = new System.Drawing.Size(73, 15);
-            this.labelModo.TabIndex = 20;
-            this.labelModo.Text = "Modo XML.";
             // 
             // Id
             // 
@@ -271,12 +180,123 @@
             this.FechaModificacion.Name = "FechaModificacion";
             this.FechaModificacion.ReadOnly = true;
             // 
-            // Form1
+            // btnEliminar
+            // 
+            this.btnEliminar.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnEliminar.Location = new System.Drawing.Point(248, 15);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(81, 23);
+            this.btnEliminar.TabIndex = 8;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(11, 136);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(328, 168);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelinfo
+            // 
+            this.labelinfo.AutoSize = true;
+            this.labelinfo.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.labelinfo.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelinfo.ForeColor = System.Drawing.SystemColors.Info;
+            this.labelinfo.Location = new System.Drawing.Point(14, 86);
+            this.labelinfo.Name = "labelinfo";
+            this.labelinfo.Size = new System.Drawing.Size(30, 14);
+            this.labelinfo.TabIndex = 10;
+            this.labelinfo.Text = "info";
+            // 
+            // btnRestablecer
+            // 
+            this.btnRestablecer.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRestablecer.Location = new System.Drawing.Point(69, 380);
+            this.btnRestablecer.Name = "btnRestablecer";
+            this.btnRestablecer.Size = new System.Drawing.Size(120, 23);
+            this.btnRestablecer.TabIndex = 12;
+            this.btnRestablecer.Text = "Restablecer fichero";
+            this.btnRestablecer.UseVisualStyleBackColor = true;
+            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSalir.Location = new System.Drawing.Point(6, 380);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(57, 23);
+            this.btnSalir.TabIndex = 15;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dateTimePicker1.Location = new System.Drawing.Point(345, 380);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(228, 23);
+            this.dateTimePicker1.TabIndex = 16;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // btnMostrarPorFecha
+            // 
+            this.btnMostrarPorFecha.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnMostrarPorFecha.Location = new System.Drawing.Point(579, 380);
+            this.btnMostrarPorFecha.Name = "btnMostrarPorFecha";
+            this.btnMostrarPorFecha.Size = new System.Drawing.Size(131, 23);
+            this.btnMostrarPorFecha.TabIndex = 17;
+            this.btnMostrarPorFecha.Text = "Mostrar por fecha";
+            this.btnMostrarPorFecha.UseVisualStyleBackColor = true;
+            this.btnMostrarPorFecha.Click += new System.EventHandler(this.btnMostrarPorFecha_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(177, 310);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(107, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Cambiar modo";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboBoxModos
+            // 
+            this.comboBoxModos.FormattingEnabled = true;
+            this.comboBoxModos.Items.AddRange(new object[] {
+            "Modo memoria",
+            "Modo JSON",
+            "Modo a pelo",
+            "Modo bytes",
+            "Modo XML"});
+            this.comboBoxModos.Location = new System.Drawing.Point(6, 310);
+            this.comboBoxModos.Name = "comboBoxModos";
+            this.comboBoxModos.Size = new System.Drawing.Size(165, 23);
+            this.comboBoxModos.TabIndex = 19;
+            // 
+            // labelModo
+            // 
+            this.labelModo.AutoSize = true;
+            this.labelModo.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.labelModo.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelModo.ForeColor = System.Drawing.SystemColors.Info;
+            this.labelModo.Location = new System.Drawing.Point(177, 336);
+            this.labelModo.Name = "labelModo";
+            this.labelModo.Size = new System.Drawing.Size(74, 14);
+            this.labelModo.TabIndex = 20;
+            this.labelModo.Text = "Modo XML.";
+            // 
+            // PanelPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Info;
-            this.ClientSize = new System.Drawing.Size(1199, 411);
+            this.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.ClientSize = new System.Drawing.Size(1224, 411);
             this.Controls.Add(this.labelModo);
             this.Controls.Add(this.comboBoxModos);
             this.Controls.Add(this.button1);
@@ -293,8 +313,9 @@
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "PanelPrincipal";
+            this.Text = "Panel principal";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
