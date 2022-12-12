@@ -5,6 +5,7 @@ namespace ViewForm
     public partial class PanelPrincipal : Form
     {
         public Add FormAdd;
+        private bool isMenuServer = false; 
         public PanelPrincipal()
         {
             FormAdd = new Add(this);
@@ -166,6 +167,24 @@ namespace ViewForm
                 BusinessCalls.ChangeDataAccess(4);
             }
             Checkeo();
+        }
+
+        private void btnServer_Click(object sender, EventArgs e)
+        {
+            if(!isMenuServer)
+            {
+                this.Height += 220;
+                this.textLogs.Visible = true;
+                this.btnServer.Text = "Parar servidor";
+            }
+            else
+            {
+                this.Height -= 220;
+                this.textLogs.Visible = false;
+                this.btnServer.Text = "Iniciar servidor";
+            }
+
+            isMenuServer = !isMenuServer;
         }
     }
 }

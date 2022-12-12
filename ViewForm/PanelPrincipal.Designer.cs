@@ -53,6 +53,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.comboBoxModos = new System.Windows.Forms.ComboBox();
             this.labelModo = new System.Windows.Forms.Label();
+            this.btnServer = new System.Windows.Forms.Button();
+            this.textLogs = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -291,12 +293,35 @@
             this.labelModo.TabIndex = 20;
             this.labelModo.Text = "Modo XML.";
             // 
+            // btnServer
+            // 
+            this.btnServer.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnServer.Location = new System.Drawing.Point(195, 380);
+            this.btnServer.Name = "btnServer";
+            this.btnServer.Size = new System.Drawing.Size(144, 23);
+            this.btnServer.TabIndex = 21;
+            this.btnServer.Text = "Iniciar servidor";
+            this.btnServer.UseVisualStyleBackColor = true;
+            this.btnServer.Click += new System.EventHandler(this.btnServer_Click);
+            // 
+            // textLogs
+            // 
+            this.textLogs.Location = new System.Drawing.Point(6, 416);
+            this.textLogs.Multiline = true;
+            this.textLogs.Name = "textLogs";
+            this.textLogs.ReadOnly = true;
+            this.textLogs.Size = new System.Drawing.Size(1206, 189);
+            this.textLogs.TabIndex = 22;
+            this.textLogs.Visible = false;
+            // 
             // PanelPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(1224, 411);
+            this.ClientSize = new System.Drawing.Size(1224, 409);
+            this.Controls.Add(this.textLogs);
+            this.Controls.Add(this.btnServer);
             this.Controls.Add(this.labelModo);
             this.Controls.Add(this.comboBoxModos);
             this.Controls.Add(this.button1);
@@ -349,5 +374,7 @@
         private DataGridViewTextBoxColumn MaterialNecesario;
         private DataGridViewTextBoxColumn MusculosInvolucrados;
         private DataGridViewTextBoxColumn FechaModificacion;
+        private Button btnServer;
+        private TextBox textLogs;
     }
 }
