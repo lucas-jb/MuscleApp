@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data;
+using Data.VistasHTML;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -15,9 +17,10 @@ namespace Business.MuscleAPI
         public static Socket servidor;
         public static IPEndPoint localEndPoint;
         public static Socket conexionCliente;
-
+        public static DataAccessRepository _context = new DataAccessRepository();
         public static void Init(string direccionIp, int puerto)
         {
+            ViewParser.GenerateViews();
             ipAddress = IPAddress.Parse(direccionIp);
             servidor = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             localEndPoint = new IPEndPoint(ipAddress, puerto);
@@ -38,7 +41,10 @@ namespace Business.MuscleAPI
                     {
                         conexionCliente.Receive(bytes);
                         datos = Encoding.ASCII.GetString(bytes);
-                        OperarDatos(datos);
+                        
+                        Byte[] respuesta = Encoding.ASCII.GetBytes("HTTP/1.1 200 OK" + Environment.NewLine + Environment.NewLine + OperarDatos(datos));
+                        conexionCliente.Send(respuesta);
+
                         Debug.WriteLine("MENSAJE->" + datos);
                     }
                     catch
@@ -71,9 +77,28 @@ namespace Business.MuscleAPI
             }
         }
 
-        public static void OperarDatos(string datos)
+        public static string OperarDatos(string datos)
         {
+            string action = datos.Split('?')[1].Split(' ')[0];
 
+            if (action.Equals("index"))
+            {
+                return ViewParser.ReturnView(1);
+            }else
+            if (action.Equals("getall"))
+            {
+                string view = ViewParser.ReturnView(2);
+                view = view.Replace("@ejercicios", _context.GetAllString());
+                return view;
+            }else
+            if (action.Equals("getbyid"))
+            {
+                string view = ViewParser.ReturnView(3);
+                int id = 0;
+                view = view.Replace("@ejercicio", _context.GetByIdString(id));
+                return view;
+            }
+            return ViewParser.ReturnView(0);
         }
     }
 }

@@ -48,6 +48,11 @@ namespace Model
         {
             return "%" + Id.ToString() + ";" + Nombre + ";" + Descripcion + ";" + Dificultad.ToString() + ";" + Basico.ToString() + ";" + MaterialNecesario + ";" + FechaModificacion.ToString() + ";" + DameMusculos();
         }
+
+        public string toHTML()
+        {
+            return ("<tr> <td> "+Id.ToString()+"</td> <td> "+Nombre+ "</td> <td> " + Descripcion + "</td><td> " + Dificultad.ToString() + "</td><td> " + Basico.ToString() + "</td><td> " + MaterialNecesario + "</td><td> " + FechaModificacion.ToString() + "</td></tr>");
+        }
     }
 
 }

@@ -37,6 +37,24 @@ namespace Data
                 });
             }
         }
+        public string GetAllString()
+        {
+            string data = string.Empty;
+            foreach (Ejercicio ejercicio in _repo)
+            {
+                data += ejercicio.toHTML();
+            }
+            return data;
+        }
+        public string GetByIdString(int id)
+        {
+            var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
+            if (ejercicio is not null)
+            {
+                return ejercicio.toHTML();
+            }
+            return null;
+        }
 
         public bool CreateEjercicio(Ejercicio ejercicio)
         {
