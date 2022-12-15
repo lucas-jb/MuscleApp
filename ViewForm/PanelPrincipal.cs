@@ -187,7 +187,10 @@ namespace ViewForm
                 this.Height -= 220;
                 this.textLogs.Visible = false;
                 this.btnServer.Text = "Iniciar servidor";
-                Business.MuscleAPI.Servidor.EndConnection();
+                Task.Run(() =>
+                {
+                    Business.MuscleAPI.Servidor.EndConnection();
+                });
             }
 
             isMenuServer = !isMenuServer;
