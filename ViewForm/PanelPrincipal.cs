@@ -189,7 +189,7 @@ namespace ViewForm
                 this.btnServer.Text = "Iniciar servidor";
                 Task.Run(() =>
                 {
-                    Business.MuscleAPI.Servidor.EndConnection();
+                    Business.MuscleAPI.Servidor.servidor.Close();
                 });
             }
 

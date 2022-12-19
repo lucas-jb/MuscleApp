@@ -31,31 +31,40 @@ namespace Business.MuscleAPI
         {
             while (true)
             {
-                conexionCliente = servidor.Accept();
-                Debug.WriteLine("Peticion aceptada");
-                Task.Run(() =>
+                try
                 {
-                    Byte[] bytes = new Byte[1024];
-                    string datos = null;
-                    try
+                    conexionCliente = servidor.Accept();
+                    Debug.WriteLine("Peticion aceptada");
+                    Task.Run(() =>
                     {
-                        conexionCliente.Receive(bytes);
-                        datos = Encoding.ASCII.GetString(bytes);
-                        
-                        Byte[] respuesta = Encoding.ASCII.GetBytes("HTTP/1.1 200 OK" + Environment.NewLine + Environment.NewLine + OperarDatos(datos));
-                        conexionCliente.Send(respuesta);
+                        Byte[] bytes = new Byte[1024];
+                        string datos = null;
+                        try
+                        {
+                            conexionCliente.Receive(bytes);
+                            datos = Encoding.ASCII.GetString(bytes);
 
-                        Debug.WriteLine("MENSAJE->" + datos);
-                    }
-                    catch
-                    {
-                        Debug.WriteLine("ERROR");
-                    }
-                    finally
-                    {
-                        EndConnection();
-                    }
-                });
+                            Byte[] respuesta = Encoding.ASCII.GetBytes("HTTP/1.1 200 OK" + Environment.NewLine + Environment.NewLine + OperarDatos(datos));
+                            conexionCliente.Send(respuesta);
+
+                            Debug.WriteLine("MENSAJE->" + datos);
+                        }
+                        catch
+                        {
+                            Debug.WriteLine("ERROR");
+                        }
+                        finally
+                        {
+                            EndConnection();
+                        }
+                    });
+                }
+                catch
+                {
+
+                }
+                
+
             }
         }
 

@@ -13,6 +13,7 @@ namespace Data.VistasHTML
 
         public static void GenerateViews()
         {
+            Vistas.Clear();
             Vistas.Add(0, File.ReadAllText(_path+"404.html"));
             Vistas.Add(1, File.ReadAllText(_path+"index.html"));
             Vistas.Add(2, File.ReadAllText(_path+"GetAll.html"));
