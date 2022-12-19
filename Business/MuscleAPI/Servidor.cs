@@ -80,7 +80,9 @@ namespace Business.MuscleAPI
         public static string OperarDatos(string datos)
         {
             string action = datos.Split('?')[1].Split(' ')[0];
-
+            //string id = action.Split('$')[1];
+            string id = "";
+            
             if (action.Equals("index"))
             {
                 return ViewParser.ReturnView(1);
@@ -91,11 +93,18 @@ namespace Business.MuscleAPI
                 view = view.Replace("@ejercicios", _context.GetAllString());
                 return view;
             }else
-            if (action.Equals("getbyid"))
+            if (action.Equals("getbyid$"+id))
             {
                 string view = ViewParser.ReturnView(3);
-                int id = 0;
-                view = view.Replace("@ejercicio", _context.GetByIdString(id));
+                try
+                {
+                    view = view.Replace("@ejercicio", _context.GetByIdString(Int32.Parse(id)));
+                }
+                catch
+                {
+
+                }
+                
                 return view;
             }
             return ViewParser.ReturnView(0);
