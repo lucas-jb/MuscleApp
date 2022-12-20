@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Business.MuscleAPI
 {
@@ -34,8 +35,8 @@ namespace Business.MuscleAPI
         public static void Init(int puerto)
         {
             ViewParser.GenerateViews();
-            //ipAddress = IPAddress.Parse(GetLocalIPAddress());
-            ipAddress = IPAddress.Parse("192.168.101.107");
+            ipAddress = IPAddress.Parse(GetLocalIPAddress());
+            //ipAddress = IPAddress.Parse("192.168.101.107");
             servidor = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             localEndPoint = new IPEndPoint(ipAddress, puerto);
             servidor.Bind(localEndPoint);
@@ -58,7 +59,7 @@ namespace Business.MuscleAPI
                         {
                             conexionCliente.Receive(bytes);
                             datos = Encoding.UTF8.GetString(bytes);
-                            
+
                             string text = "HTTP/1.1 200 OK" + Environment.NewLine + Environment.NewLine + await OperarDatos(datos);
                             byte[] respuesta = Encoding.UTF8.GetBytes(text);
                             conexionCliente.Send(respuesta);
