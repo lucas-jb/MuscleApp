@@ -34,7 +34,8 @@ namespace Business.MuscleAPI
         public static void Init(int puerto)
         {
             ViewParser.GenerateViews();
-            ipAddress = IPAddress.Parse(GetLocalIPAddress());
+            //ipAddress = IPAddress.Parse(GetLocalIPAddress());
+            ipAddress = IPAddress.Parse("192.168.101.107");
             servidor = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             localEndPoint = new IPEndPoint(ipAddress, puerto);
             servidor.Bind(localEndPoint);
@@ -49,16 +50,17 @@ namespace Business.MuscleAPI
                 {
                     conexionCliente = servidor.Accept();
                     SendInfo("Peticion aceptada" + Environment.NewLine);
-                    Task.Run(() =>
+                    Task.Run(async () =>
                     {
-                        Byte[] bytes = new Byte[1024];
+                        byte[] bytes = new byte[1024];
                         string datos = null;
                         try
                         {
                             conexionCliente.Receive(bytes);
-                            datos = Encoding.ASCII.GetString(bytes);
-
-                            Byte[] respuesta = Encoding.ASCII.GetBytes("HTTP/1.1 200 OK" + Environment.NewLine + Environment.NewLine + OperarDatos(datos));
+                            datos = Encoding.UTF8.GetString(bytes);
+                            
+                            string text = "HTTP/1.1 200 OK" + Environment.NewLine + Environment.NewLine + await OperarDatos(datos);
+                            byte[] respuesta = Encoding.UTF8.GetBytes(text);
                             conexionCliente.Send(respuesta);
 
                         }
@@ -100,7 +102,7 @@ namespace Business.MuscleAPI
             }
         }
 
-        public static string OperarDatos(string datos)
+        public static async Task<string> OperarDatos(string datos)
         {
             string action;
             try
@@ -109,7 +111,7 @@ namespace Business.MuscleAPI
             }
             catch
             {
-                return ViewParser.ReturnView(0);
+                return await ViewParser.ReturnView(0);
             }
             string id = "";
             if (action.Contains("id$"))
@@ -119,17 +121,17 @@ namespace Business.MuscleAPI
 
             if (action.Equals("index"))
             {
-                return ViewParser.ReturnView(1);
+                return await ViewParser.ReturnView(1);
             }else
             if (action.Equals("getall"))
             {
-                string view = ViewParser.ReturnView(2);
+                string view = await ViewParser.ReturnView(2);
                 view = view.Replace("@ejercicios", _context.GetAllString());
                 return view;
             }else
             if(action.Equals("createnew"))
             {
-                string view = ViewParser.ReturnView(7);
+                string view = await ViewParser.ReturnView(7);
                 return view;
             }
             if (action.Equals("getbyid$"+id))
@@ -140,19 +142,19 @@ namespace Business.MuscleAPI
                     int intId = Int32.Parse(id);
                     if (_context.Exists(intId))
                     {
-                        view = ViewParser.ReturnView(3);
-                        view = view.Replace("@ejercicio", _context.GetByIdString(Int32.Parse(id)));
+                        view = await ViewParser.ReturnView(3);
+                        view = view.Replace("@ejercicio", await _context.GetByIdString(Int32.Parse(id)));
                     }
                     else
                     {
-                        view = ViewParser.ReturnView(4);
+                        view = await ViewParser.ReturnView(4);
                         view = view.Replace("@id", id);
                     }
                     return view;
                 }
                 catch
                 {
-                    return ViewParser.ReturnView(0);
+                    return await ViewParser.ReturnView(0);
                 }
             }else
             if (action.Equals("deletebyid$" + id))
@@ -163,7 +165,7 @@ namespace Business.MuscleAPI
                     int intId = Int32.Parse(id);
                     if (_context.Exists(intId))
                     {
-                        view = ViewParser.ReturnView(5);
+                        view = await ViewParser.ReturnView(5);
                         if (_context.DeleteEjercicio(intId))
                         {
                             view = view.Replace("@ejercicio", "Ejercicio con id " + id + " eliminado con exito.");
@@ -175,14 +177,14 @@ namespace Business.MuscleAPI
                     }
                     else
                     {
-                        view = ViewParser.ReturnView(4);
+                        view = await ViewParser.ReturnView(4);
                         view = view.Replace("@id", id);
                     }
                     return view;
                 }
                 catch
                 {
-                    return ViewParser.ReturnView(0);
+                    return await ViewParser.ReturnView(0);
                 }
             }else
             if (action.Equals("editbyid$" + id))
@@ -193,20 +195,20 @@ namespace Business.MuscleAPI
                     int intId = Int32.Parse(id);
                     if (_context.Exists(intId))
                     {
-                        view = ViewParser.ReturnView(6);
-                        view = view.Replace("@ejercicio", _context.GetByIdString(Int32.Parse(id)));
+                        view = await ViewParser.ReturnView(6);
+                        view = view.Replace("@ejercicio", await _context.GetByIdString(Int32.Parse(id)));
                         view = view.Replace("@id", id);
                     }
                     else
                     {
-                        view = ViewParser.ReturnView(4);
+                        view = await ViewParser.ReturnView(4);
                         view = view.Replace("@id", id);
                     }
                     return view;
                 }
                 catch
                 {
-                    return ViewParser.ReturnView(0);
+                    return await ViewParser.ReturnView(0);
                 }
             }
             else
@@ -232,13 +234,13 @@ namespace Business.MuscleAPI
                     };
                     _context.EditEjercicio(editEjecicio);
                     string view;
-                    view = ViewParser.ReturnView(3);
-                    view = view.Replace("@ejercicio", _context.GetByIdString(editEjercicioId));
+                    view = await ViewParser.ReturnView(3);
+                    view = view.Replace("@ejercicio", await _context.GetByIdString(editEjercicioId));
                     return view;
                 }
                 catch
                 {
-                    return ViewParser.ReturnView(0);
+                    return await ViewParser.ReturnView(0);
                 }
             }else
             if(action.Contains("created"))
@@ -264,16 +266,16 @@ namespace Business.MuscleAPI
                     };
                     _context.CreateEjercicio(editEjecicio);
                     string view;
-                    view = ViewParser.ReturnView(3);
-                    view = view.Replace("@ejercicio", _context.GetByIdString(editEjercicioId));
+                    view = await ViewParser.ReturnView(3);
+                    view = view.Replace("@ejercicio", await _context.GetByIdString(editEjercicioId));
                     return view;
                 }
                 catch
                 {
-                    return ViewParser.ReturnView(0);
+                    return await ViewParser.ReturnView(0);
                 }
             }
-            return ViewParser.ReturnView(0);
+            return await ViewParser.ReturnView(0);
         }
     }
 }

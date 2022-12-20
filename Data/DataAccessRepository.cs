@@ -55,14 +55,17 @@ namespace Data
             }
             return data;
         }
-        public string GetByIdString(int id)
+        public Task<string?> GetByIdString(int id)
         {
-            var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
-            if (ejercicio is not null)
+            return Task.Run(() =>
             {
-                return ejercicio.toHTML();
-            }
-            return null;
+                var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
+                if (ejercicio is not null)
+                {
+                    return ejercicio.toHTML();
+                }
+                return null;
+            });
         }
 
         public bool CreateEjercicio(Ejercicio ejercicio)
