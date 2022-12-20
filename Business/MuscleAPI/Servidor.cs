@@ -38,6 +38,7 @@ namespace Business.MuscleAPI
             localEndPoint = new IPEndPoint(ipAddress, puerto);
             servidor.Bind(localEndPoint);
             servidor.Listen(10);
+            SendInfo("Servidor iniciado en la dirección:"+localEndPoint.ToString()+Environment.NewLine);
         }
         public static void StartServer()
         {
@@ -46,7 +47,7 @@ namespace Business.MuscleAPI
                 while (true)
                 {
                     conexionCliente = servidor.Accept();
-                    Debug.WriteLine("Peticion aceptada");
+                    SendInfo("Peticion aceptada" + Environment.NewLine);
                     Task.Run(() =>
                     {
                         Byte[] bytes = new Byte[1024];
@@ -59,11 +60,10 @@ namespace Business.MuscleAPI
                             Byte[] respuesta = Encoding.ASCII.GetBytes("HTTP/1.1 200 OK" + Environment.NewLine + Environment.NewLine + OperarDatos(datos));
                             conexionCliente.Send(respuesta);
 
-                            Debug.WriteLine("MENSAJE->" + datos);
                         }
                         catch
                         {
-                            Debug.WriteLine("ERROR");
+                            SendInfo("ERROR" + Environment.NewLine);
                         }
                         finally
                         {
@@ -77,7 +77,10 @@ namespace Business.MuscleAPI
 
             }
         }
-
+        public static string SendInfo(string data)
+        {
+            return data;
+        }
         public static void EndConnection()
         {
             bool isClosed = false;
@@ -99,8 +102,12 @@ namespace Business.MuscleAPI
         public static string OperarDatos(string datos)
         {
             string action = datos.Split('?')[1].Split(' ')[0];
-            string id = action.Split("$")[1];
-            
+            string id = "";
+            if (action.Contains("$"))
+            {
+                id = action.Split("$")[1];
+            }
+
             if (action.Equals("index"))
             {
                 return ViewParser.ReturnView(1);
@@ -113,16 +120,18 @@ namespace Business.MuscleAPI
             }else
             if (action.Equals("getbyid$"+id))
             {
-                string view = ViewParser.ReturnView(3);
-                try
+                string view;
+                int intId = Int32.Parse(id);
+                if (_context.Exists(intId))
                 {
+                    view = ViewParser.ReturnView(3);
                     view = view.Replace("@ejercicio", _context.GetByIdString(Int32.Parse(id)));
                 }
-                catch
+                else
                 {
-
+                    view = ViewParser.ReturnView(4);
+                    view = view.Replace("@id", id);
                 }
-                
                 return view;
             }
             return ViewParser.ReturnView(0);

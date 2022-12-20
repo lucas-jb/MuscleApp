@@ -37,6 +37,15 @@ namespace Data
                 });
             }
         }
+        public bool Exists(int id)
+        {
+            var ejercicio = _repo.FirstOrDefault(p => p.Id == id);
+            if (ejercicio is not null)
+            {
+                return true;
+            }
+            return false;
+        }
         public string GetAllString()
         {
             string data = string.Empty;

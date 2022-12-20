@@ -7,11 +7,19 @@
 <body>
     <h1 class="display-1">Bienvenido a MuscleApp</h1>
     <h2>Esto es el index.</h2>
-    <input class="form-control" placeholder="id" />
+    <input id="data" class="form-control" placeholder="id" />
     <div class="btn-group">
         <a href="/?getall" class="btn btn-primary">Ver todos</a>
-        <a href="/?getall" class="btn btn-success">Ver por id</a>
+        <a href="javascript:redirect()" class="btn btn-success">Ver por id</a>
         <a href="/?getall" class="btn btn-danger">Eliminar por id</a>
     </div>
 </body>
+<script>
+    const redirect = () => { 
+        let url = "/?getbyid$" + document.getElementById("data").value;
+        if (url !== "/?getbyid$") {
+            window.location.href = url;
+        }
+    }
+</script>
 </html>

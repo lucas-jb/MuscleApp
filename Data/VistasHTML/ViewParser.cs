@@ -18,6 +18,7 @@ namespace Data.VistasHTML
             Vistas.Add(1, File.ReadAllText(_path+"index.html"));
             Vistas.Add(2, File.ReadAllText(_path+"GetAll.html"));
             Vistas.Add(3, File.ReadAllText(_path+"GetById.html"));
+            Vistas.Add(4, File.ReadAllText(_path+"IdNotFound.html"));
         }
         public static string ReturnView(int id)
         {
