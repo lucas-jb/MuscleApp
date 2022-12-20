@@ -101,7 +101,15 @@ namespace Business.MuscleAPI
 
         public static string OperarDatos(string datos)
         {
-            string action = datos.Split('?')[1].Split(' ')[0];
+            string action;
+            try
+            {
+                action = datos.Split('?')[1].Split(' ')[0];
+            }
+            catch
+            {
+                return ViewParser.ReturnView(0);
+            }
             string id = "";
             if (action.Contains("$"))
             {
@@ -118,21 +126,86 @@ namespace Business.MuscleAPI
                 view = view.Replace("@ejercicios", _context.GetAllString());
                 return view;
             }else
+            if(action.Equals("createnew"))
+            {
+                string view = ViewParser.ReturnView(7);
+                return view;
+            }
             if (action.Equals("getbyid$"+id))
             {
-                string view;
-                int intId = Int32.Parse(id);
-                if (_context.Exists(intId))
+                try
                 {
-                    view = ViewParser.ReturnView(3);
-                    view = view.Replace("@ejercicio", _context.GetByIdString(Int32.Parse(id)));
+                    string view;
+                    int intId = Int32.Parse(id);
+                    if (_context.Exists(intId))
+                    {
+                        view = ViewParser.ReturnView(3);
+                        view = view.Replace("@ejercicio", _context.GetByIdString(Int32.Parse(id)));
+                    }
+                    else
+                    {
+                        view = ViewParser.ReturnView(4);
+                        view = view.Replace("@id", id);
+                    }
+                    return view;
                 }
-                else
+                catch
                 {
-                    view = ViewParser.ReturnView(4);
-                    view = view.Replace("@id", id);
+                    return ViewParser.ReturnView(0);
                 }
-                return view;
+            }else
+            if (action.Equals("deletebyid$" + id))
+            {
+                try
+                {
+                    string view;
+                    int intId = Int32.Parse(id);
+                    if (_context.Exists(intId))
+                    {
+                        view = ViewParser.ReturnView(5);
+                        if (_context.DeleteEjercicio(intId))
+                        {
+                            view = view.Replace("@ejercicio", "Ejercicio con id " + id + " eliminado con exito.");
+                        }
+                        else
+                        {
+                            view = view.Replace("@ejercicio", "Ejercicio con id " + id + " no se pudo eliminar.");
+                        }
+                    }
+                    else
+                    {
+                        view = ViewParser.ReturnView(4);
+                        view = view.Replace("@id", id);
+                    }
+                    return view;
+                }
+                catch
+                {
+                    return ViewParser.ReturnView(0);
+                }
+            }else
+            if (action.Equals("editbyid$" + id))
+            {
+                try
+                {
+                    string view;
+                    int intId = Int32.Parse(id);
+                    if (_context.Exists(intId))
+                    {
+                        view = ViewParser.ReturnView(6);
+                        view = view.Replace("@ejercicio", _context.GetByIdString(Int32.Parse(id)));
+                    }
+                    else
+                    {
+                        view = ViewParser.ReturnView(4);
+                        view = view.Replace("@id", id);
+                    }
+                    return view;
+                }
+                catch
+                {
+                    return ViewParser.ReturnView(0);
+                }
             }
             return ViewParser.ReturnView(0);
         }

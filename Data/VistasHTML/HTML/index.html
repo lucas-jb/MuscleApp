@@ -10,16 +10,33 @@
     <input id="data" class="form-control" placeholder="id" />
     <div class="btn-group">
         <a href="/?getall" class="btn btn-primary">Ver todos</a>
-        <a href="javascript:redirect()" class="btn btn-success">Ver por id</a>
-        <a href="/?getall" class="btn btn-danger">Eliminar por id</a>
+        <a href="javascript:getbyid()" class="btn btn-success">Ver por id</a>
+        <a href="javascript:deletebyid()" class="btn btn-danger">Eliminar por id</a>
+        <a href="javascript:editbyid()" class="btn btn-secondary">Editar por id</a>
+        <a href="/?createnew" class="btn btn-primary">Crear nuevo</a>
     </div>
 </body>
 <script>
-    const redirect = () => { 
+    const getbyid = () => { 
         let url = "/?getbyid$" + document.getElementById("data").value;
         if (url !== "/?getbyid$") {
             window.location.href = url;
         }
     }
+
+    const deletebyid = () => {
+        let url = "/?deletebyid$" + document.getElementById("data").value;
+        if (url !== "/?deletebyid$") {
+            window.location.href = url;
+        }
+    }
+
+    const editbyid = () => {
+        let url = "/?editbyid$" + document.getElementById("data").value;
+        if (url !== "/?editbyid$") {
+            window.location.href = url;
+        }
+    }
+
 </script>
 </html>

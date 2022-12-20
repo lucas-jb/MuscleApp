@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1 class="display-1">Bienvenido a MuscleApp</h1>
-    <h2>Buscar ejercicios por id</h2>
+    <h2>Editar ejercicios por id</h2>
     <div class="btn-group">
         <a href="/?index" class="btn btn-primary">Volver al index</a>
     </div>
@@ -26,5 +26,19 @@
             @ejercicio
         </tbody>
     </table>
+    <form>
+        <input id="nombre" class="form-control" placeholder="Nombre" />
+        <input id="descripcion" class="form-control" placeholder="Descripcion" />
+        <input id="dificultad" class="form-control" placeholder="Dificultad" />
+        <input id="basico" class="form-control" placeholder="Basico" />
+        <input id="materialNecesario" class="form-control" placeholder="Material necesario" />
+        <a href="javascript:edit()" class="btn btn-success">/Editar</a>
+    </form>
 </body>
+<script>
+    const edit = () => {
+        window.alert("Ejercicio editado");
+        window.location.href = "/?index";
+    }
+</script>
 </html>
