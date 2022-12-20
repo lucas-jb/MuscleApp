@@ -18,10 +18,22 @@ namespace Business.MuscleAPI
         public static IPEndPoint localEndPoint;
         public static Socket conexionCliente;
         public static DataAccessRepository _context = new DataAccessRepository();
-        public static void Init(string direccionIp, int puerto)
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+        public static void Init(int puerto)
         {
             ViewParser.GenerateViews();
-            ipAddress = IPAddress.Parse(direccionIp);
+            ipAddress = IPAddress.Parse(GetLocalIPAddress());
             servidor = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             localEndPoint = new IPEndPoint(ipAddress, puerto);
             servidor.Bind(localEndPoint);
@@ -29,9 +41,9 @@ namespace Business.MuscleAPI
         }
         public static void StartServer()
         {
-            while (true)
+            try
             {
-                try
+                while (true)
                 {
                     conexionCliente = servidor.Accept();
                     Debug.WriteLine("Peticion aceptada");
@@ -59,11 +71,9 @@ namespace Business.MuscleAPI
                         }
                     });
                 }
-                catch
-                {
-
-                }
-                
+            }
+            catch
+            {
 
             }
         }
@@ -89,8 +99,7 @@ namespace Business.MuscleAPI
         public static string OperarDatos(string datos)
         {
             string action = datos.Split('?')[1].Split(' ')[0];
-            //string id = action.Split('$')[1];
-            string id = "";
+            string id = action.Split("$")[1];
             
             if (action.Equals("index"))
             {

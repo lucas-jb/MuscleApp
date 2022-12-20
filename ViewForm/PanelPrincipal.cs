@@ -178,7 +178,7 @@ namespace ViewForm
                 this.btnServer.Text = "Parar servidor";
                 Task.Run(() =>
                 {
-                    Business.MuscleAPI.Servidor.Init("192.168.101.107", 15000);
+                    Business.MuscleAPI.Servidor.Init(15000);
                     Business.MuscleAPI.Servidor.StartServer();
                 });
             }
