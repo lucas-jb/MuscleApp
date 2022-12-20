@@ -1,5 +1,6 @@
 ﻿using Data;
 using Data.VistasHTML;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -111,7 +112,7 @@ namespace Business.MuscleAPI
                 return ViewParser.ReturnView(0);
             }
             string id = "";
-            if (action.Contains("$"))
+            if (action.Contains("id$"))
             {
                 id = action.Split("$")[1];
             }
@@ -194,12 +195,77 @@ namespace Business.MuscleAPI
                     {
                         view = ViewParser.ReturnView(6);
                         view = view.Replace("@ejercicio", _context.GetByIdString(Int32.Parse(id)));
+                        view = view.Replace("@id", id);
                     }
                     else
                     {
                         view = ViewParser.ReturnView(4);
                         view = view.Replace("@id", id);
                     }
+                    return view;
+                }
+                catch
+                {
+                    return ViewParser.ReturnView(0);
+                }
+            }
+            else
+            if(action.Contains("edited")){
+                try
+                {
+                    int editEjercicioId = Int32.Parse(action.Split("$id=")[1].Split('$')[0]);
+                    string editEjercicioNombre = action.Split("$nombre=")[1].Split('$')[0];
+                    string editEjercicioDescripcion = action.Split("$descripcion=")[1].Split('$')[0];
+                    int editEjercicioDificultad = Int32.Parse(action.Split("$dificultad=")[1].Split('$')[0]);
+                    bool editEjercicioBasico = (action.Split("$basico=")[1].Split('$')[0]).Equals("True");
+                    string editEjercicioMaterialNecesario = action.Split("$materialNecesario=")[1].Split('%')[0];
+
+                    Ejercicio editEjecicio = new()
+                    {
+                        Id = editEjercicioId,
+                        Nombre = editEjercicioNombre,
+                        Descripcion = editEjercicioDescripcion,
+                        Dificultad = editEjercicioDificultad,
+                        Basico = editEjercicioBasico,
+                        MaterialNecesario = editEjercicioMaterialNecesario,
+                        FechaModificacion = DateTime.Now
+                    };
+                    _context.EditEjercicio(editEjecicio);
+                    string view;
+                    view = ViewParser.ReturnView(3);
+                    view = view.Replace("@ejercicio", _context.GetByIdString(editEjercicioId));
+                    return view;
+                }
+                catch
+                {
+                    return ViewParser.ReturnView(0);
+                }
+            }else
+            if(action.Contains("created"))
+            {
+                try
+                {
+                    int editEjercicioId = Int32.Parse(action.Split("$id=")[1].Split('$')[0]);
+                    string editEjercicioNombre = action.Split("$nombre=")[1].Split('$')[0];
+                    string editEjercicioDescripcion = action.Split("$descripcion=")[1].Split('$')[0];
+                    int editEjercicioDificultad = Int32.Parse(action.Split("$dificultad=")[1].Split('$')[0]);
+                    bool editEjercicioBasico = (action.Split("$basico=")[1].Split('$')[0]).Equals("True");
+                    string editEjercicioMaterialNecesario = action.Split("$materialNecesario=")[1].Split('%')[0];
+
+                    Ejercicio editEjecicio = new()
+                    {
+                        Id = editEjercicioId,
+                        Nombre = editEjercicioNombre,
+                        Descripcion = editEjercicioDescripcion,
+                        Dificultad = editEjercicioDificultad,
+                        Basico = editEjercicioBasico,
+                        MaterialNecesario = editEjercicioMaterialNecesario,
+                        FechaModificacion = DateTime.Now
+                    };
+                    _context.CreateEjercicio(editEjecicio);
+                    string view;
+                    view = ViewParser.ReturnView(3);
+                    view = view.Replace("@ejercicio", _context.GetByIdString(editEjercicioId));
                     return view;
                 }
                 catch

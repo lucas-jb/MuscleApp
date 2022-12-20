@@ -11,6 +11,7 @@
         <a href="/?index" class="btn btn-primary">Volver al index</a>
     </div>
     <form>
+        <input id="id" class="form-control" placeholder="Id" />
         <input id="nombre" class="form-control" placeholder="Nombre" />
         <input id="descripcion" class="form-control" placeholder="Descripcion" />
         <input id="dificultad" class="form-control" placeholder="Dificultad" />
@@ -21,8 +22,16 @@
 </body>
 <script>
     const create = () => {
+        let id = document.getElementById("id").value;
+        let nombre = document.getElementById("nombre").value;
+        let descripcion = document.getElementById("descripcion").value;
+        let dificultad = document.getElementById("dificultad").value;
+        let basico = document.getElementById("basico").value;
+        let materialNecesario = document.getElementById("materialNecesario").value;
+        let url = "/?created$id=" + id + "$nombre=" + nombre + "$descripcion=" + descripcion + "$dificultad=" + dificultad + "$basico=" + basico + "$materialNecesario=" + materialNecesario + "%";
         window.alert("Ejercicio creado");
-        window.location.href = "/?index";
+
+        window.location.href = url;
     }
 </script>
-</html>
+</html >

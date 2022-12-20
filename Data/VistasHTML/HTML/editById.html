@@ -27,18 +27,27 @@
         </tbody>
     </table>
     <form>
+        <input id="id" class="form-control" value="@id" disabled/>
         <input id="nombre" class="form-control" placeholder="Nombre" />
         <input id="descripcion" class="form-control" placeholder="Descripcion" />
         <input id="dificultad" class="form-control" placeholder="Dificultad" />
         <input id="basico" class="form-control" placeholder="Basico" />
         <input id="materialNecesario" class="form-control" placeholder="Material necesario" />
-        <a href="javascript:edit()" class="btn btn-success">/Editar</a>
+        <a href="javascript:edit()" class="btn btn-success">Editar</a>
     </form>
 </body>
 <script>
     const edit = () => {
+        let id = document.getElementById("id").value;
+        let nombre = document.getElementById("nombre").value;
+        let descripcion = document.getElementById("descripcion").value;
+        let dificultad = document.getElementById("dificultad").value;
+        let basico = document.getElementById("basico").value;
+        let materialNecesario = document.getElementById("materialNecesario").value;
+        let url = "/?edited$id="+id+"$nombre=" + nombre + "$descripcion=" + descripcion + "$dificultad=" + dificultad + "$basico=" + basico + "$materialNecesario=" + materialNecesario + "%";
         window.alert("Ejercicio editado");
-        window.location.href = "/?index";
+        
+        window.location.href = url;
     }
 </script>
 </html>
