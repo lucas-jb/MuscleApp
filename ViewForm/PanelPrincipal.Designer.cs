@@ -55,6 +55,7 @@
             this.labelModo = new System.Windows.Forms.Label();
             this.btnServer = new System.Windows.Forms.Button();
             this.textLogs = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -261,9 +262,9 @@
             this.button1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(177, 310);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 23);
+            this.button1.Size = new System.Drawing.Size(71, 23);
             this.button1.TabIndex = 18;
-            this.button1.Text = "Cambiar modo";
+            this.button1.Text = "Cambiar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -287,7 +288,7 @@
             this.labelModo.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.labelModo.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelModo.ForeColor = System.Drawing.SystemColors.Info;
-            this.labelModo.Location = new System.Drawing.Point(177, 336);
+            this.labelModo.Location = new System.Drawing.Point(255, 314);
             this.labelModo.Name = "labelModo";
             this.labelModo.Size = new System.Drawing.Size(74, 14);
             this.labelModo.TabIndex = 20;
@@ -296,11 +297,11 @@
             // btnServer
             // 
             this.btnServer.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnServer.Location = new System.Drawing.Point(195, 380);
+            this.btnServer.Location = new System.Drawing.Point(195, 353);
             this.btnServer.Name = "btnServer";
             this.btnServer.Size = new System.Drawing.Size(144, 23);
             this.btnServer.TabIndex = 21;
-            this.btnServer.Text = "Iniciar servidor";
+            this.btnServer.Text = "Iniciar servidor web";
             this.btnServer.UseVisualStyleBackColor = true;
             this.btnServer.Click += new System.EventHandler(this.btnServer_Click);
             // 
@@ -314,12 +315,24 @@
             this.textLogs.TabIndex = 22;
             this.textLogs.Visible = false;
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button2.Location = new System.Drawing.Point(195, 380);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(144, 23);
+            this.button2.TabIndex = 23;
+            this.button2.Text = "Iniciar API Rest";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // PanelPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(1224, 409);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.textLogs);
             this.Controls.Add(this.btnServer);
             this.Controls.Add(this.labelModo);
@@ -376,5 +389,6 @@
         private DataGridViewTextBoxColumn FechaModificacion;
         private Button btnServer;
         private TextBox textLogs;
+        private Button button2;
     }
 }

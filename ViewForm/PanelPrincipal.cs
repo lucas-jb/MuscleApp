@@ -6,6 +6,7 @@ namespace ViewForm
     {
         public Add FormAdd;
         private bool isMenuServer = false; 
+        private bool isMenuAPI = false;
         public PanelPrincipal()
         {
             FormAdd = new Add(this);
@@ -175,7 +176,7 @@ namespace ViewForm
             {
                 this.Height += 220;
                 this.textLogs.Visible = true;
-                this.btnServer.Text = "Parar servidor";
+                this.btnServer.Text = "Parar servidor web";
                 Task.Run(() =>
                 {
                     Business.MuscleAPI.Servidor.Init(15000);
@@ -186,7 +187,7 @@ namespace ViewForm
             {
                 this.Height -= 220;
                 this.textLogs.Visible = false;
-                this.btnServer.Text = "Iniciar servidor";
+                this.btnServer.Text = "Iniciar servidor web";
                 Task.Run(() =>
                 {
                     Business.MuscleAPI.Servidor.servidor.Close();
@@ -196,5 +197,27 @@ namespace ViewForm
             isMenuServer = !isMenuServer;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!isMenuAPI)
+            {
+                this.button2.Text = "Parar API Rest";
+                Task.Run(() =>
+                {
+                    Business.APIRest.Servidor.Init(20000);
+                    Business.APIRest.Servidor.StartServer();
+                });
+            }
+            else
+            {
+                this.button2.Text = "Iniciar API Rest";
+                Task.Run(() =>
+                {
+                    Business.APIRest.Servidor.servidor.Close();
+                });
+            }
+
+            isMenuAPI = !isMenuAPI;
+        }
     }
 }
