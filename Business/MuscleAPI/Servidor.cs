@@ -35,8 +35,8 @@ namespace Business.MuscleAPI
         public static void Init(int puerto)
         {
             ViewParser.GenerateViews();
-            ipAddress = IPAddress.Parse(GetLocalIPAddress());
-            //ipAddress = IPAddress.Parse("192.168.101.107");
+            //ipAddress = IPAddress.Parse(GetLocalIPAddress());
+            ipAddress = IPAddress.Parse("192.168.101.82");
             servidor = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             localEndPoint = new IPEndPoint(ipAddress, puerto);
             servidor.Bind(localEndPoint);

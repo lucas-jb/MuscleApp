@@ -46,8 +46,9 @@ namespace Data
             File.WriteAllLines(_ruta, lista);
             return true;
         }
-        public bool CreateEjercicio(Ejercicio ejercicio)
+        public bool CreateEjercicio(string stringEjercicio)
         {
+            Ejercicio ejercicio = JsonSerializer.Deserialize<Model.Ejercicio>(stringEjercicio);
             int id = ejercicio.Id;
             if (_repo.FirstOrDefault(p => p.Id == id) is null)
             {
@@ -58,8 +59,9 @@ namespace Data
             return false;
         }
 
-        public bool DeleteEjercicio(int id)
+        public bool DeleteEjercicio(string id_string)
         {
+            int id = Int32.Parse(id_string);
             var deleteEjercito = _repo.FirstOrDefault(p => p.Id == id);
             if (deleteEjercito is not null)
             {
@@ -72,9 +74,9 @@ namespace Data
 
         public bool EditEjercicio(Ejercicio ejercicio)
         {
-            if (DeleteEjercicio(ejercicio.Id))
+            if (DeleteEjercicio(ejercicio.Id.ToString()))
             {
-                return CreateEjercicio(ejercicio);
+                return CreateEjercicio(JsonSerializer.Serialize<Model.Ejercicio>(ejercicio));
             }
             return false;
         }
