@@ -36,7 +36,7 @@ namespace Business.MuscleAPI
         {
             ViewParser.GenerateViews();
             //ipAddress = IPAddress.Parse(GetLocalIPAddress());
-            ipAddress = IPAddress.Parse("192.168.101.82");
+            ipAddress = IPAddress.Parse("192.168.1.76");
             servidor = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             localEndPoint = new IPEndPoint(ipAddress, puerto);
             servidor.Bind(localEndPoint);

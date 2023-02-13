@@ -37,7 +37,7 @@ namespace Business.APIRest
             _repo = new JSONConverter();
             ViewParser.GenerateViews();
             //ipAddress = IPAddress.Parse(GetLocalIPAddress());
-            ipAddress = IPAddress.Parse("192.168.101.82");
+            ipAddress = IPAddress.Parse("192.168.1.76");
             servidor = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             localEndPoint = new IPEndPoint(ipAddress, puerto);
             servidor.Bind(localEndPoint);
@@ -128,25 +128,34 @@ namespace Business.APIRest
                 action = datos.Split("/");
 
                 body = aux[2];
+                body = body.Substring(0, body.IndexOf('}')+1);
                 body.TrimEnd();
+
                 if (action[1] == "musculos")
                 {
                     if (action.Length > 6)
                     {
-                        _repo.CreateEjercicio(body);
+                        return _repo.CreateEjercicio(body);
                     }
                 }
             }
             else if (datos.StartsWith("PUT"))
             {
+                string body = datos.Substring(datos.IndexOf("Content-Length:") + 15);
+
+                string[] aux = body.Split('\n');
                 action = datos.Split("/");
+
+                body = aux[2];
+                body = body.Substring(0, body.IndexOf('}') + 1);
+                body.TrimEnd();
+
                 if (action[1] == "musculos")
                 {
                     if (action.Length > 6)
                     {
-                        return await _repo.GetEjercicioAsync(action[2]);
+                        return _repo.EditEjercicio(body);
                     }
-                    return await _repo.GetAllEjerciciosAsync();
                 }
             }
             else if (datos.StartsWith("DELETE"))

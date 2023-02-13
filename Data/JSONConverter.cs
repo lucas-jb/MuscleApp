@@ -46,17 +46,17 @@ namespace Data
             File.WriteAllLines(_ruta, lista);
             return true;
         }
-        public bool CreateEjercicio(string stringEjercicio)
+        public string CreateEjercicio(string stringEjercicio)
         {
-            Ejercicio ejercicio = JsonSerializer.Deserialize<Model.Ejercicio>(stringEjercicio);
+            Ejercicio? ejercicio = JsonSerializer.Deserialize<Ejercicio>(stringEjercicio);
             int id = ejercicio.Id;
             if (_repo.FirstOrDefault(p => p.Id == id) is null)
             {
                 _repo.Add(ejercicio);
                 UpdateFichero();
-                return true;
+                return "Creado con éxito.";
             }
-            return false;
+            return "Error al crear.";
         }
 
         public bool DeleteEjercicio(string id_string)
@@ -72,13 +72,16 @@ namespace Data
             return false;
         }
 
-        public bool EditEjercicio(Ejercicio ejercicio)
+        public string EditEjercicio(string stringEjercicio)
         {
-            if (DeleteEjercicio(ejercicio.Id.ToString()))
+            Ejercicio? ejercicio = JsonSerializer.Deserialize<Ejercicio>(stringEjercicio);
+            int id = ejercicio.Id;
+
+            if (DeleteEjercicio(id.ToString()))
             {
-                return CreateEjercicio(JsonSerializer.Serialize<Model.Ejercicio>(ejercicio));
+                return CreateEjercicio(stringEjercicio);
             }
-            return false;
+            return "Error al crear.";
         }
 
         public Task<string> GetAllEjerciciosAsync()

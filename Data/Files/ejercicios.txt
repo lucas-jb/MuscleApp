@@ -95,3 +95,4 @@
 {"Id":96,"Nombre":"Ejercicio 96","Descripcion":"Descripcion 96","Dificultad":1,"Basico":false,"MaterialNecesario":"MaterialNecesario 96","MusculosInvolucrados":["Musculo1","Musculo2","Musculo3"],"FechaModificacion":"0001-01-01T00:00:00"}
 {"Id":97,"Nombre":"Ejercicio 97","Descripcion":"Descripcion 97","Dificultad":1,"Basico":false,"MaterialNecesario":"MaterialNecesario 97","MusculosInvolucrados":["Musculo1","Musculo2","Musculo3"],"FechaModificacion":"0001-01-01T00:00:00"}
 {"Id":98,"Nombre":"Ejercicio 98","Descripcion":"Descripcion 98","Dificultad":1,"Basico":false,"MaterialNecesario":"MaterialNecesario 98","MusculosInvolucrados":["Musculo1","Musculo2","Musculo3"],"FechaModificacion":"0001-01-01T00:00:00"}
+{"Id":101,"Nombre":"Ejercicio 15 - edit","Descripcion":"Descripcion 15","Dificultad":1,"Basico":false,"MaterialNecesario":"MaterialNecesario 15","MusculosInvolucrados":["Musculo1","Musculo2","Musculo3"],"FechaModificacion":"0001-01-01T00:00:00"}
