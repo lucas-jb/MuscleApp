@@ -10,6 +10,7 @@ namespace Data
 {
     public class DataAccessDDBB : IDataAccess
     {
+        private readonly List<Ejercicio> _repo = new List<Ejercicio>();
         public string connectionString = "Data Source=POTAS\\SQLEXPRESS;Initial Catalog=Ejercicios;Integrated Security=True";
 
         public void Connecction(string queryString)
@@ -22,9 +23,10 @@ namespace Data
                 con.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
+                    string gola = "";
                     while (reader.Read())
                     {
-                        //textBox1.Text += reader.GetString(0) + " // " + reader.GetString(1) + " // " + reader.GetDecimal(2).ToString() + "\r\n";
+                        gola += reader.GetString(0) + " // " + reader.GetString(1) + " // " + reader.GetDecimal(2).ToString() + "\r\n";
                     }
                 }
             }
