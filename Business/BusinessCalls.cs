@@ -9,7 +9,7 @@ namespace Business
 {
     public static class BusinessCalls
     {
-        public static IDataAccess _context { get; set; } =  new Data.DataAccessXML();
+        public static IDataAccess _context { get; set; } =  new Data.DataAccessDDBB();
         public static void ChangeDataAccess(int num)
         {
             if(num == 0)
