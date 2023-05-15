@@ -167,6 +167,12 @@ namespace ViewForm
                 labelModo.Text = "Modo XML.";
                 BusinessCalls.ChangeDataAccess(4);
             }
+            else
+            if (comboBoxModos.SelectedIndex == 5)
+            {
+                labelModo.Text = "Modo EF.";
+                BusinessCalls.ChangeDataAccess(5);
+            }
             Checkeo();
         }
 

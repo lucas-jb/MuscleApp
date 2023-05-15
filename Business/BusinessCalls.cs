@@ -34,6 +34,10 @@ namespace Business
             if (num == 4)
             {
                 _context = new Data.DataAccessXML();
+            }else
+            if (num == 4)
+            {
+                _context = new Data.EF.Utils();
             }
         }
         public static Task<Ejercicio> DameEjercicio(int id)
