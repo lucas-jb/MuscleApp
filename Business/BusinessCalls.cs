@@ -35,9 +35,14 @@ namespace Business
             {
                 _context = new Data.DataAccessXML();
             }else
-            if (num == 4)
+            if (num == 5)
             {
                 _context = new Data.EF.Utils();
+            }
+            else
+            if (num == 6)
+            {
+                _context = new Data.DataAccessDapper();
             }
         }
         public static Task<Ejercicio> DameEjercicio(int id)

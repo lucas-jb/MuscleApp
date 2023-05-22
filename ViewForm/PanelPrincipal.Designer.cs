@@ -276,7 +276,9 @@
             "Modo JSON",
             "Modo a pelo",
             "Modo bytes",
-            "Modo XML"});
+            "Modo XML",
+            "Modo EF",
+            "Modo Dapper"});
             this.comboBoxModos.Location = new System.Drawing.Point(6, 310);
             this.comboBoxModos.Name = "comboBoxModos";
             this.comboBoxModos.Size = new System.Drawing.Size(165, 23);

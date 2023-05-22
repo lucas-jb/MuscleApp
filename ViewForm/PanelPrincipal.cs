@@ -173,6 +173,12 @@ namespace ViewForm
                 labelModo.Text = "Modo EF.";
                 BusinessCalls.ChangeDataAccess(5);
             }
+            else
+            if (comboBoxModos.SelectedIndex == 6)
+            {
+                labelModo.Text = "Modo Dapper.";
+                BusinessCalls.ChangeDataAccess(6);
+            }
             Checkeo();
         }
 
